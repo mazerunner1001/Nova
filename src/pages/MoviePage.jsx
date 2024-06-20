@@ -4,6 +4,8 @@ import NavbarExplore from "../components/NavbarExplore";
 import Footer from "../components/Footer";
 import MovieList from "../components/MovieList";
 import profile from '../assets/profileicon.jpg';
+import MoviePlaceholder from '../assets/Movie_Placeholder.jpg';
+import Backdrop from '../assets/Backdrop.jpg';
 
 const Movie = () => {
   const [currentDetail, setCurrentDetail] = useState(null);
@@ -59,14 +61,14 @@ const Movie = () => {
       <div className="movie__intro w-full inset-0 absolute">
         <div className="bg-gradient-to-t from-black to-transparent inset-0 absolute h-[500px]" />
         {currentDetail && (
-          <img className="w-full h-[500px] object-cover object-[0_35%]" src={`https://image.tmdb.org/t/p/original${currentDetail.backdrop_path}`} alt="Backdrop" />
+          <img className="w-full h-[500px] object-cover object-[0_35%]" src={currentDetail.backdrop_path ? `https://image.tmdb.org/t/p/original${currentDetail.backdrop_path}` : Backdrop } alt="Backdrop" />
         )}
       </div>
       <div className="movie__detail mt-56 w-3/4 flex relative">
         <div className="movie__detailLeft mr-8">
           <div className="movie__posterBox">
             {currentDetail && (
-              <img className="max-w-[230px] rounded-lg shadow-2xl" src={`https://image.tmdb.org/t/p/original${currentDetail.poster_path}`} alt="Poster" />
+              <img className="max-w-[230px]  object-cover rounded-lg shadow-2xl" src={currentDetail.poster_path ? `https://image.tmdb.org/t/p/original${currentDetail.poster_path}`: MoviePlaceholder } alt="Poster" />
             )}
           </div>
         </div>
@@ -111,7 +113,7 @@ const Movie = () => {
         </div>
       </div>
 
-      <div className="absolute top-[620px] left-60 space-y-4 inline">
+      <div className="absolute top-[620px] left-[15%] space-y-4 inline">
         {currentDetail && currentDetail.homepage && (
           <div className="flex items-center justify-center bg-black">
             <div className="group relative">
@@ -154,7 +156,7 @@ const Movie = () => {
             <h2 className="text-2xl text-white font-bold mb-4">Cast</h2>
             <div id="no-scrollbar" className="overflow-x-scroll overflow-y-none flex py-[30px]">
               {cast.length > 0 && cast.map(actor => (
-                <div className="castItem flex-shrink-0 w-36 m-1 cursor-pointer" key={actor.id} onClick={() => handlePersonClick(cast.id)}>
+                <div className="castItem flex-shrink-0 w-36 m-1 cursor-pointer" key={actor.id} onClick={() => handlePersonClick(actor.id)}>
                   <img className="w-full h-48 object-cover rounded-lg " src={actor.profile_path ? `https://image.tmdb.org/t/p/w200${actor.profile_path}` : profile} alt={actor.name} />
                   <div className="castName text-white text-center mt-2">{actor.name}</div>
                   <div className="castCharacter text-gray-400 text-center">{actor.character}</div>

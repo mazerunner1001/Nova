@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../index.css';
+import Movie_Placeholder from "../assets/Movie_Placeholder.jpg";
 
 const Cards = ({ movie }) => {
     const [isImageLoaded, setIsImageLoaded] = useState(false);
@@ -36,7 +37,7 @@ const Cards = ({ movie }) => {
                 )}
                 <img 
                     className={`h-[270px] w-full object-cover ${isImageLoaded ? 'block' : 'hidden'}`} 
-                    src={`https://image.tmdb.org/t/p/original${movie.poster_path || ""}`} 
+                    src={movie.poster_path ? `https://image.tmdb.org/t/p/original${movie.poster_path || ""}` : Movie_Placeholder} 
                     alt={movie.original_title || movie.name} 
                     onLoad={handleImageLoad} 
                 />
