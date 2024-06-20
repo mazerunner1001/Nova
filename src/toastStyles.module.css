@@ -1,0 +1,26 @@
+.toast-container {
+  .Toastify__toast--default {
+    background-color: #1c1c1e !important;
+    color: #fff !important;
+    border-radius: 10px !important;
+    padding: 16px !important;
+  }
+
+  .Toastify__toast-body {
+    font-size: 16px !important;
+    font-weight: 500 !important;
+  }
+
+  .Toastify__close-button {
+    color: #fff !important;
+    opacity: 0.8 !important;
+  }
+
+  .Toastify__progress-bar {
+    background-color: #4caf50 !important;
+  }
+
+  .Toastify__toast-icon {
+    color: #4caf50 !important;
+  }
+}
