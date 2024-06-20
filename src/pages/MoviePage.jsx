@@ -61,14 +61,14 @@ const Movie = () => {
       <div className="movie__intro w-full inset-0 absolute">
         <div className="bg-gradient-to-t from-black to-transparent inset-0 absolute h-[500px]" />
         {currentDetail && (
-          <img className="w-full h-[500px] object-cover object-[0_35%]" src={currentDetail.backdrop_path ? `https://image.tmdb.org/t/p/original${currentDetail.backdrop_path}` : Backdrop } alt="Backdrop" />
+          <img className="w-full h-[500px] object-cover object-[0_35%]" src={currentDetail.backdrop_path ? `https://image.tmdb.org/t/p/original${currentDetail.backdrop_path}` : Backdrop} alt="Backdrop" />
         )}
       </div>
       <div className="movie__detail mt-56 w-3/4 flex relative">
         <div className="movie__detailLeft mr-8">
           <div className="movie__posterBox">
             {currentDetail && (
-              <img className="max-w-[230px]  object-cover rounded-lg shadow-2xl" src={currentDetail.poster_path ? `https://image.tmdb.org/t/p/original${currentDetail.poster_path}`: MoviePlaceholder } alt="Poster" />
+              <img className="max-w-[230px]  object-cover rounded-lg shadow-2xl" src={currentDetail.poster_path ? `https://image.tmdb.org/t/p/original${currentDetail.poster_path}` : MoviePlaceholder} alt="Poster" />
             )}
           </div>
         </div>
@@ -136,7 +136,9 @@ const Movie = () => {
         )}
       </div>
 
-      <div className="flex flex-col w-4/5 mt-56 space-y-12">
+      {directors.length > 0 && cast.length > 0 && (
+        <>
+          <div className="flex flex-col w-4/5 mt-56 space-y-12">
         <div className="flex space-x-4 w-full overflow-hidden relative">
           {directors.length > 0 && (
             <div className="bg-black overflow-hidden relative w-auto">
@@ -151,7 +153,7 @@ const Movie = () => {
               </div>
             </div>
           )}
-          <div className="bg-white w-[2px] h-64 translate-y-16 self-stretch mx-4"></div>
+          {directors.length > 0 && (<div className="bg-white w-[2px] h-64 translate-y-16 self-stretch mx-4"></div>)}
           <div className="bg-black overflow-hidden relative flex-1">
             <h2 className="text-2xl text-white font-bold mb-4">Cast</h2>
             <div id="no-scrollbar" className="overflow-x-scroll overflow-y-none flex py-[30px]">
@@ -166,19 +168,24 @@ const Movie = () => {
           </div>
         </div>
       </div>
+        </>)}
 
-      <div className="bg-black overflow-hidden w-4/5 relative flex-1">
-        <h2 className="text-2xl text-white font-bold mb-4">Crew</h2>
-        <div id="no-scrollbar" className="overflow-x-scroll overflow-y-none flex py-[30px]">
-          {crew.length > 0 && crew.map(crew => (
-            <div className=" flex-shrink-0 w-36 m-1 cursor-pointer" key={crew.id} onClick={() => handlePersonClick(crew.id)}>
-              <img className="w-full h-48 object-cover rounded-lg " src={crew.profile_path ? `https://image.tmdb.org/t/p/original${crew.profile_path}` : profile} alt={crew.name} />
-              <div className="castName text-white text-center mt-2">{crew.name}</div>
-              <div className="castCharacter text-gray-400 text-center">{crew.job}</div>
+      {crew.length > 0 && (
+        <>
+          <div className="bg-black overflow-hidden w-4/5 relative flex-1">
+            <h2 className="text-2xl text-white font-bold mb-4">Crew</h2>
+            <div id="no-scrollbar" className="overflow-x-scroll overflow-y-none flex py-[30px]">
+              {crew.map(crew => (
+                <div className=" flex-shrink-0 w-36 m-1 cursor-pointer" key={crew.id} onClick={() => handlePersonClick(crew.id)}>
+                  <img className="w-full h-48 object-cover rounded-lg " src={crew.profile_path ? `https://image.tmdb.org/t/p/original${crew.profile_path}` : profile} alt={crew.name} />
+                  <div className="castName text-white text-center mt-2">{crew.name}</div>
+                  <div className="castCharacter text-gray-400 text-center">{crew.job}</div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
+        </>)}
+
 
       <div className="relative w-full">
         <h2 className="text-2xl text-white font-bold ml-20">Recommendations</h2>
