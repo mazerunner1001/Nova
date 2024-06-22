@@ -6,7 +6,7 @@ const YoutubeSlide = ({ url }) => (
     <div className="video-container">
         <iframe
             width="800"
-            height="450"
+            height="650"
             src={url}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -16,11 +16,19 @@ const YoutubeSlide = ({ url }) => (
 );
 
 const MovieTrailerCarousel = ({ videos }) => {
+    // Separate trailers from other videos
+    const trailers = videos.filter(video => video.type === "Trailer");
+    const otherVideos = videos.filter(video => video.type !== "Trailer");
 
-    const limitedVideos = videos.slice(0, 20);
+    // Limit the number of trailers and other videos displayed to 10
+    const limitedTrailers = trailers.slice(0, 10);
+    const limitedOtherVideos = otherVideos.slice(0, 10 - limitedTrailers.length);
+
+    // Combine trailers and other videos
+    const limitedVideos = [...limitedTrailers, ...limitedOtherVideos];
 
     return (
-        <Carousel showThumbs={true} showStatus={false} infiniteLoop={true} useKeyboardArrows={true} autoPlay={true} transitionTime={3}>
+        <Carousel showThumbs={false} showStatus={false} infiniteLoop={true} useKeyboardArrows={true} autoPlay={true} transitionTime={3}>
             {limitedVideos.map((video, index) => (
                 <YoutubeSlide key={index} url={`https://www.youtube.com/embed/${video.key}`} />
             ))}

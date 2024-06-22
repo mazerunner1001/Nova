@@ -144,7 +144,7 @@ const Movie = () => {
       </div>
 
       <div className="w-4/5 items-center">
-          <div className="mt-36 text-white h-[500px] ">
+          <div className="mt-36 text-white h-[650px] ">
               {videos.length > 0 && (
                 <div className="movie__trailer mt-8 mb-5 mr-8">
                   <MovieTrailerCarousel videos={videos} />
