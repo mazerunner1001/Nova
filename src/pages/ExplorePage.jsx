@@ -71,7 +71,8 @@ const ExplorePage = () => {
             autoPlay={true}
             transitionTime={3}
             infiniteLoop={true}
-            showStatus={false}
+            showStatus={true}
+            useKeyboardArrows={true}
           >
             {popularMovies && popularMovies.map(movie => (
               <Link

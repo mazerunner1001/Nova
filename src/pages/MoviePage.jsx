@@ -6,6 +6,9 @@ import MovieList from "../components/MovieList";
 import profile from '../assets/profileicon.jpg';
 import MoviePlaceholder from '../assets/Movie_Placeholder.jpg';
 import Backdrop from '../assets/Backdrop.jpg';
+import MovieTrailerCarousel from '../components/MovieTrailerCarousel'; // Import the new component
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 
 const Movie = () => {
   const [currentDetail, setCurrentDetail] = useState(null);
@@ -21,6 +24,10 @@ const Movie = () => {
     getData();
     window.scrollTo(0, 0);
   }, [id]);
+
+  useEffect(() => {
+    console.log(videos); // Add this line to check the videos data
+  }, [videos]);
 
   const getData = () => {
     fetch(`https://api.themoviedb.org/3/${isTVShow ? 'tv' : 'movie'}/${id}?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`)
@@ -102,13 +109,13 @@ const Movie = () => {
             </div>
             {trailer && (
               <div className="movie__trailer mt-8 mb-5 mr-8 hover:underline">
-                <a href={`https://www.youtube.com/watch?v=${trailer.key}`} target="_blank" rel="noopener noreferrer" className="text-blue-300">Watch Trailer</a>
+                <a href={`https://www.youtube.com/watch?v=${trailer.key}`} target="_blank" rel="noopener noreferrer" className="text-blue-300">Watch Trailer on YouTube</a>
               </div>
             )}
           </div>
           <div className="movie__detailRightBottom my-8 flex-0.8 relative">
             <div className="synopsisText text-xl mb-5 font-semibold">Synopsis</div>
-            <div>{currentDetail ? currentDetail.overview : ""}</div>
+            <div>{currentDetail ? currentDetail.overview.slice(0,450) : ""}</div>
           </div>
         </div>
       </div>
@@ -136,43 +143,53 @@ const Movie = () => {
         )}
       </div>
 
-      {directors.length > 0 && cast.length > 0 && (
+      <div className="w-4/5 items-center">
+          <div className="mt-36 text-white h-[500px] ">
+              {videos.length > 0 && (
+                <div className="movie__trailer mt-8 mb-5 mr-8">
+                  <MovieTrailerCarousel videos={videos} />
+                </div>
+              )}
+          </div>
+      </div>
+
+      {(directors.length > 0 || cast.length) > 0 && (
         <>
-          <div className="flex flex-col w-4/5 mt-56 space-y-12">
-        <div className="flex space-x-4 w-full overflow-hidden relative">
-          {directors.length > 0 && (
-            <div className="bg-black overflow-hidden relative w-auto">
-              <h2 className="text-2xl text-white font-bold mb-4">Director(s)</h2>
-              <div id="no-scrollbar" className="overflow-x-scroll overflow-y-none flex py-[30px]">
-                {directors.map(director => (
-                  <div className="directorItem flex-shrink-0 w-36 m-1 cursor-pointer" key={director.id} onClick={() => handlePersonClick(director.id)}>
-                    <img className="w-full h-48 object-cover rounded-lg" src={`https://image.tmdb.org/t/p/w200${director.profile_path}`} alt={director.name} />
-                    <div className="directorName text-white text-center mt-2">{director.name}</div>
+          <div className="flex flex-col w-4/5 mt-20 space-y-12">
+            <div className="flex space-x-4 w-full overflow-hidden relative">
+              {directors.length > 0 && (
+                <div className="bg-black overflow-hidden relative w-auto">
+                  <h2 className="text-2xl text-white font-bold mb-4">Director(s)</h2>
+                  <div id="no-scrollbar" className="overflow-x-scroll overflow-y-none flex py-[30px]">
+                    {directors.map(director => (
+                      <div className="directorItem flex-shrink-0 w-36 m-1 cursor-pointer" key={director.id} onClick={() => handlePersonClick(director.id)}>
+                        <img className="w-full h-48 object-cover rounded-lg" src={director.profile_path ? `https://image.tmdb.org/t/p/w200${director.profile_path}` : profile} alt={director.name} />
+                        <div className="directorName text-white text-center mt-2">{director.name}</div>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </div>
+              )}
+              {directors.length > 0 && (<div className="bg-white w-[2px] h-64 translate-y-16 self-stretch mx-4"></div>)}
+              <div className="bg-black overflow-hidden relative flex-1">
+                <h2 className="text-2xl text-white font-bold mb-4">Cast</h2>
+                <div id="no-scrollbar" className="overflow-x-scroll overflow-y-none flex py-[30px]">
+                  {cast.length > 0 && cast.map(actor => (
+                    <div className="castItem flex-shrink-0 w-36 m-1 cursor-pointer" key={actor.id} onClick={() => handlePersonClick(actor.id)}>
+                      <img className="w-full h-48 object-cover rounded-lg " src={actor.profile_path ? `https://image.tmdb.org/t/p/w200${actor.profile_path}` : profile} alt={actor.name} />
+                      <div className="castName text-white text-center mt-2">{actor.name}</div>
+                      <div className="castCharacter text-gray-400 text-center">{actor.character}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          )}
-          {directors.length > 0 && (<div className="bg-white w-[2px] h-64 translate-y-16 self-stretch mx-4"></div>)}
-          <div className="bg-black overflow-hidden relative flex-1">
-            <h2 className="text-2xl text-white font-bold mb-4">Cast</h2>
-            <div id="no-scrollbar" className="overflow-x-scroll overflow-y-none flex py-[30px]">
-              {cast.length > 0 && cast.map(actor => (
-                <div className="castItem flex-shrink-0 w-36 m-1 cursor-pointer" key={actor.id} onClick={() => handlePersonClick(actor.id)}>
-                  <img className="w-full h-48 object-cover rounded-lg " src={actor.profile_path ? `https://image.tmdb.org/t/p/w200${actor.profile_path}` : profile} alt={actor.name} />
-                  <div className="castName text-white text-center mt-2">{actor.name}</div>
-                  <div className="castCharacter text-gray-400 text-center">{actor.character}</div>
-                </div>
-              ))}
-            </div>
           </div>
-        </div>
-      </div>
         </>)}
 
       {crew.length > 0 && (
         <>
-          <div className="bg-black overflow-hidden w-4/5 relative flex-1">
+          <div className="bg-black overflow-hidden w-4/5 mt-8 relative flex-1">
             <h2 className="text-2xl text-white font-bold mb-4">Crew</h2>
             <div id="no-scrollbar" className="overflow-x-scroll overflow-y-none flex py-[30px]">
               {crew.map(crew => (

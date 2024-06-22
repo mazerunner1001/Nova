@@ -9,7 +9,7 @@ const UnderDevelopmentCard = ({ onClose }) => {
     };
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-100 z-50">
             <div className=" relative w-full max-w-md p-1">
                 <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-rose-400 opacity-75 blur transition duration-500 group-hover:opacity-100"></div>
                 <div className="relative bg-black text-white rounded-lg p-8 shadow-lg w-full text-center">
