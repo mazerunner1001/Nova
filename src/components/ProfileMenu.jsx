@@ -83,12 +83,12 @@ const ProfileMenu = () => {
             </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="/profile/edit"
               className="block px-4 py-2 hover:bg-gray-800 "
             >
               Settings
-            </a>
+            </Link>
           </li>
         </ul>
         <div className="py-2">

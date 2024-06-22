@@ -16,6 +16,7 @@ import styles from './toastStyles.module.css';
 import ProfilePage from './pages/ProfilePage';
 import PrivateRoute from './components/PrivateRoute';
 import CastDetail from "../src/pages/CastDetail";
+import UpdateProfile from "./pages/UpdateProfile";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,6 +34,7 @@ const router = createBrowserRouter(
       {/* Private Routes */}
       <Route path='' element={<PrivateRoute />}>
         <Route path='profile' element={<ProfilePage />} />
+        <Route path='profile/edit' element={<UpdateProfile />} />
       </Route>
     </Route>
   )

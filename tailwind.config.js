@@ -13,7 +13,7 @@ module.exports = withMT({
       colors: {
         primary: {
           light: "#f7f7f7",
-          DEFAULT: "linear-gradient(179.4deg, rgb(12, 20, 69) -16.9%, rgb(71, 30, 84) 119.9%)",
+          DEFAULT: "linear-gradient(109.6deg, rgb(0, 0, 0) 11.2%, rgb(8, 8, 8) 51.2%, rgb(39, 0, 54) 98.6%)",
           dark: "#222222",
         },
         secondary: {

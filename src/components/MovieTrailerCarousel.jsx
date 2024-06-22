@@ -28,7 +28,7 @@ const MovieTrailerCarousel = ({ videos }) => {
     const limitedVideos = [...limitedTrailers, ...limitedOtherVideos];
 
     return (
-        <Carousel showThumbs={false} showStatus={false} infiniteLoop={true} useKeyboardArrows={true} autoPlay={true} transitionTime={3}>
+        <Carousel showThumbs={false} showStatus={false} infiniteLoop={true} useKeyboardArrows={true}>
             {limitedVideos.map((video, index) => (
                 <YoutubeSlide key={index} url={`https://www.youtube.com/embed/${video.key}`} />
             ))}
