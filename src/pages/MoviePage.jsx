@@ -189,7 +189,7 @@ const Movie = () => {
 
       {crew.length > 0 && (
         <>
-          <div className="overflow-hidden w-4/5 mt-8 relative flex-1">
+          <div className="overflow-hidden w-4/5 relative flex-1">
             <h2 className="text-2xl text-white font-bold mb-4">Crew</h2>
             <div id="no-scrollbar" className="overflow-x-scroll overflow-y-none flex py-[30px]">
               {crew.map(crew => (
