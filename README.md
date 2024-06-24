@@ -36,15 +36,13 @@ The main objective of Project-X is to provide a platform where users can effortl
 - **Integration with External APIs**: The application integrates with external APIs to fetch real-time data about movies and TV shows, ensuring that users always have access to the latest information.
 - **Dynamic Search Functionality**: Users can search for movies and TV shows using a dynamic search functionality that provides instant results as they type.
 - **Detailed Movie and TV Show Pages**: Each movie and TV show has a dedicated page with comprehensive details, including production information, cast and crew, and related media.
-- **Interactive UI Elements**
 
 ## Technologies Used
 
-- **Frontend**: React, Redux, Tailwind CSS, Material Tailwind
+- **Frontend**: React, Redux, Tailwind CSS
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
 - **Authentication**: JWT (JSON Web Tokens)
-- **Deployment**: (Specify if deployed)
 
 ## Getting Started
 
