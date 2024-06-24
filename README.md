@@ -73,7 +73,7 @@ To get a local copy up and running follow these simple steps.
     npm run dev
 2. Open http://localhost:3000 to view it in the browser.
 
-### API Endpoints
+## API Endpoints
 
 User Authentication
     - Login: POST /api/users/login
@@ -87,7 +87,7 @@ User Profile
 - Update Profile: PUT /api/users/profile
     - Body: { "name": "John Doe", "email": "john@example.com", "password": "newpassword123" }
 
-### Contributing
+## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
 
