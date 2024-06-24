@@ -122,7 +122,7 @@ const Movie = () => {
 
       <div className="absolute top-[620px] left-[15%] space-y-4 inline">
         {currentDetail && currentDetail.homepage && (
-          <div className="flex items-center justify-center bg-black">
+          <div className="flex items-center justify-center">
             <div className="group relative">
               <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 opacity-75 blur transition duration-500 group-hover:opacity-100"></div>
               <button className="relative rounded-full bg-black px-7 py-4 text-white">
@@ -132,7 +132,7 @@ const Movie = () => {
           </div>
         )}
         {currentDetail && currentDetail.imdb_id && (
-          <div className="flex items-center justify-center bg-black">
+          <div className="flex items-center justify-center">
             <div className="group relative">
               <div className="absolute -inset-1 rounded-full opacity-75 blur transition duration-500 group-hover:opacity-100"></div>
               <button className="relative rounded-full bg-yellow-600 px-12 py-4 text-black font-extrabold">
@@ -158,7 +158,7 @@ const Movie = () => {
           <div className="flex flex-col w-4/5 mt-20 space-y-12">
             <div className="flex space-x-4 w-full overflow-hidden relative">
               {directors.length > 0 && (
-                <div className="bg-black overflow-hidden relative w-auto">
+                <div className="overflow-hidden relative w-auto">
                   <h2 className="text-2xl text-white font-bold mb-4">Director(s)</h2>
                   <div id="no-scrollbar" className="overflow-x-scroll overflow-y-none flex py-[30px]">
                     {directors.map(director => (
@@ -171,7 +171,7 @@ const Movie = () => {
                 </div>
               )}
               {directors.length > 0 && (<div className="bg-white w-[2px] h-64 translate-y-16 self-stretch mx-4"></div>)}
-              <div className="bg-black overflow-hidden relative flex-1">
+              <div className=" overflow-hidden relative flex-1">
                 <h2 className="text-2xl text-white font-bold mb-4">Cast</h2>
                 <div id="no-scrollbar" className="overflow-x-scroll overflow-y-none flex py-[30px]">
                   {cast.length > 0 && cast.map(actor => (
@@ -189,7 +189,7 @@ const Movie = () => {
 
       {crew.length > 0 && (
         <>
-          <div className="bg-black overflow-hidden w-4/5 mt-8 relative flex-1">
+          <div className="overflow-hidden w-4/5 mt-8 relative flex-1">
             <h2 className="text-2xl text-white font-bold mb-4">Crew</h2>
             <div id="no-scrollbar" className="overflow-x-scroll overflow-y-none flex py-[30px]">
               {crew.map(crew => (

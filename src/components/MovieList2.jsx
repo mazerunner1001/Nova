@@ -120,7 +120,7 @@ const MovieList2 = () => {
   const genreName = genres.find(g => g.id.toString() === genre)?.name || "Genre";
 
   return (
-    <div className={`bg-black pt-1`}>
+    <div className={`bg-transparent pt-1`}>
       <h2 className="text-3xl text-white font-bold text-center mt-20 font-serif italic">
         {genreName.toUpperCase()}
       </h2>

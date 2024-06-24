@@ -85,7 +85,7 @@ const CastDetail = () => {
   return (
     <>
       <NavbarExplore />
-      <div className="bg-black text-white min-h-screen p-6">
+      <div className="text-white min-h-screen p-6">
         <div className="container mt-16 mx-auto flex flex-col md:flex-row items-center">
           <div className="md:w-1/3 flex justify-center">
             <img

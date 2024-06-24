@@ -32,7 +32,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative w-full bg-black text-white ">
+    <footer className="relative w-full bg-transparent text-white ">
       <div className="mx-auto w-full max-w-7xl px-8 py-12">
         <div className="flex flex-col md:flex-row md:justify-between mb-8">
           <div className=" space-y-4 mb-8 md:mb-0">

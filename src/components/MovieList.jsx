@@ -55,7 +55,7 @@ const MovieList = ({ type = "popular", Class = "movie", Subclass = "", style1 = 
   };
 
   return (
-    <div className={`bg-black pt-1 ${style1}`}>
+    <div className={`bg-transparent pt-1 ${style1}`}>
       {!style1 && (
         <h2 className="text-3xl text-white font-bold text-center mt-20">
           {type.charAt(0).toUpperCase() + type.slice(1)}

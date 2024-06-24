@@ -4,7 +4,7 @@ import Cards from "./Card";
 
 const MovieList = ({ movieList, isTVShow = false }) => {
   return (
-    <div className="bg-black overflow-hidden pt-1">
+    <div className="bg-transparent overflow-hidden pt-1">
       <div id="no-scrollbar" className="flex py-[30px] overflow-x-scroll space-x-1 overflow-y-none ml-8 pl-9">
         {movieList.map(movie => (
           isTVShow ? (
