@@ -96,7 +96,7 @@ export default function Footer() {
                 />
               </svg>
             </Typography>
-            <Typography as="a" href="https://www.instagram.com/praneeth.swarna/" className="opacity-80 transition-opacity hover:opacity-100">
+            <Typography as="a" href="https://www.instagram.com/praneethchandra123/" className="opacity-80 transition-opacity hover:opacity-100">
               <svg className="h-5 w-5" fill="white" viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   fillRule="evenodd"
@@ -105,7 +105,7 @@ export default function Footer() {
                 />
               </svg>
             </Typography>
-            <Typography as="a" href="https://github.com/PraneethPanchakshari" className="opacity-80 transition-opacity hover:opacity-100">
+            <Typography as="a" href="https://github.com/mazerunner1001" className="opacity-80 transition-opacity hover:opacity-100">
               <svg className="h-5 w-5" fill="white" viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   fillRule="evenodd"
@@ -114,7 +114,7 @@ export default function Footer() {
                 />
               </svg>
             </Typography>
-            <Typography as="a" href="https://www.linkedin.com/in/praneeth-panchakshari-165445217/" className="opacity-80 transition-opacity hover:opacity-100">
+            <Typography as="a" href="https://www.linkedin.com/in/praneeth-chandra-957240251/" className="opacity-80 transition-opacity hover:opacity-100">
               <svg className="h-5 w-5" fill="white" viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   fillRule="evenodd"
