@@ -16,18 +16,32 @@ const Movie = () => {
   const [crew, setCrew] = useState([]);
   const [videos, setVideos] = useState([]);
   const [keywords, setKeywords] = useState([]);
+  const [watchProviders, setWatchProviders] = useState([]);
+  const [images, setImages] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
+  const [certification, setCertification] = useState(null);
   const isTVShow = window.location.pathname.includes("/tv/");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState('');
+
+  const openModal = (filePath) => {
+    setSelectedImage(filePath);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedImage('');
+    setModalOpen(false);
+  };
+
 
   useEffect(() => {
     getData();
     window.scrollTo(0, 0);
   }, [id]);
 
-  useEffect(() => {
-    console.log(videos); // Add this line to check the videos data
-  }, [videos]);
 
   const getData = () => {
     fetch(`https://api.themoviedb.org/3/${isTVShow ? 'tv' : 'movie'}/${id}?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`)
@@ -35,6 +49,7 @@ const Movie = () => {
       .then(data => {
         setCurrentDetail(data);
         getAdditionalData();
+        getReleaseDates(data.id);
       });
   };
 
@@ -53,14 +68,48 @@ const Movie = () => {
     fetch(`https://api.themoviedb.org/3/${isTVShow ? 'tv' : 'movie'}/${id}/keywords?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`)
       .then(res => res.json())
       .then(data => setKeywords(isTVShow ? data.results || [] : data.keywords || []));
+
+    fetch(`https://api.themoviedb.org/3/${isTVShow ? 'tv' : 'movie'}/${id}/watch/providers?api_key=4e44d9029b1270a757cddc766a1bcb63`)
+      .then(res => res.json())
+      .then(data => setWatchProviders(data.results.US ? data.results.US.flatrate || [] : []));
+
+    fetch(`https://api.themoviedb.org/3/${isTVShow ? 'tv' : 'movie'}/${id}/images?api_key=4e44d9029b1270a757cddc766a1bcb63`)
+      .then(res => res.json())
+      .then(data => setImages(data.backdrops || []));
+
+    fetch(`https://api.themoviedb.org/3/${isTVShow ? 'tv' : 'movie'}/${id}/reviews?api_key=4e44d9029b1270a757cddc766a1bcb63`)
+      .then(res => res.json())
+      .then(data => setReviews(data.results || []));
+  };
+
+  const getReleaseDates = (movieId) => {
+    fetch(`https://api.themoviedb.org/3/movie/${movieId}/release_dates?api_key=4e44d9029b1270a757cddc766a1bcb63`)
+      .then(res => res.json())
+      .then(data => {
+        console.log('Release Dates Data:', data); // Add this line
+        const usRelease = data.results.find(release => release.iso_3166_1 === 'US');
+        if (usRelease) {
+          const certification = usRelease.release_dates.find(date => date.certification);
+          if (certification) {
+            setCertification(certification.certification);
+          } else {
+            setCertification("NA"); // No certification found
+          }
+        } else {
+          setCertification("NA"); // No US release found
+        }
+      });
   };
 
   const handlePersonClick = (personId) => {
     navigate(`/person/${personId}`);
   };
 
+  console.log(currentDetail);
+
   const directors = crew.filter(member => member.job === "Director");
   const trailer = videos.find(video => video.type === "Trailer");
+
 
   return (
     <div className="bg-black flex flex-col items-center">
@@ -70,7 +119,11 @@ const Movie = () => {
         {currentDetail && (
           <img className="w-full h-[500px] object-cover object-[0_35%]" src={currentDetail.backdrop_path ? `https://image.tmdb.org/t/p/original${currentDetail.backdrop_path}` : Backdrop} alt="Backdrop" />
         )}
+        <div className="absolute bottom-64 right-0 pr-16 pl-6 py-2 bg-gray-900 border-2 border-l-white border-transparent text-white text-md">
+          {certification}
+        </div>
       </div>
+
       <div className=" mt-56 w-3/4 flex relative">
         <div className="mr-8">
           <div>
@@ -82,7 +135,7 @@ const Movie = () => {
         <div className="text-white flex flex-col h-[450px] ">
           <div>
             <div className="text-sky-400 font-semibold text-3xl">{currentDetail ? (currentDetail.title || currentDetail.name) : ""}</div>
-            <div >{currentDetail ? currentDetail.tagline : ""}</div>
+            <div className="italic mb-4">{currentDetail ? currentDetail.tagline : ""}</div>
             <div className=" flex flex-wrap justify-start items-center">
               {currentDetail ? currentDetail.vote_average : ""}
               <svg className="mt-[2px] ml-1" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 64 64" enableBackground="new 0 0 64 64">
@@ -115,7 +168,7 @@ const Movie = () => {
           </div>
           <div className="my-8 flex-0.8 relative">
             <div className="text-xl mb-5 font-semibold">Synopsis</div>
-            <div>{currentDetail ? currentDetail.overview.slice(0,450) : ""}</div>
+            <div>{currentDetail ? currentDetail.overview.slice(0, 450) : ""}</div>
           </div>
         </div>
       </div>
@@ -143,14 +196,72 @@ const Movie = () => {
         )}
       </div>
 
-      <div className="w-4/5 items-center">
-          <div className="mt-36 text-white h-[650px] ">
-              {videos.length > 0 && (
-                <div className="mt-8 mb-5 mr-8">
-                  <MovieTrailerCarousel videos={videos} />
-                </div>
-              )}
+      <div className="w-3/4 mt-40">
+        <h2 className="text-white text-xl mb-4">Images</h2>
+        <div id="no-scrollbar" className="flex overflow-x-auto space-x-4">
+          {images.length > 0 ? (
+            images.map((image, index) => (
+              <img
+                className="w-56 h-32 object-cover rounded-lg cursor-pointer"
+                src={`https://image.tmdb.org/t/p/original${image.file_path}`}
+                alt={`Backdrop ${index + 1}`}
+                onClick={() => openModal(image.file_path)}
+              />
+            ))
+          ) : (
+            <div className="text-gray-400">No images available</div>
+          )}
+        </div>
+      </div>
+
+       {/* Modal */}
+       {modalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="relative w-4/5 h-auto my-auto mx-auto">
+            <button
+              className="absolute top-4 left-4 px-[10px] text-white bg-black bg-opacity-50 rounded-full text-4xl"
+              onClick={closeModal}
+            >
+              &times;
+            </button>
+            <img
+              src={`https://image.tmdb.org/t/p/original${selectedImage}`}
+              alt="Modal Image"
+              className="w-full h-full"
+            />
           </div>
+        </div>
+      )}
+
+      <div className="w-3/4 mt-10">
+        <h2 className="text-white text-xl mb-4">Watch Providers</h2>
+        <div className="flex overflow-x-auto space-x-4">
+          {watchProviders.length > 0 ? (
+            watchProviders.map((provider, index) => (
+              <div key={index} className="flex flex-col items-center">
+                <img
+                  className="w-16 h-16 object-cover rounded-full"
+                  src={`https://image.tmdb.org/t/p/original${provider.logo_path}`}
+                  alt={provider.provider_name}
+                />
+                <div className="text-white text-sm mt-2">{provider.provider_name}</div>
+              </div>
+            ))
+          ) : (
+            <div className="text-gray-400">No watch providers available</div>
+          )}
+        </div>
+      </div>
+
+
+      <div className="w-4/5 items-center">
+        <div className="mt-16 text-white h-[650px] ">
+          {videos.length > 0 && (
+            <div className="mt-8 mb-5 mr-8">
+              <MovieTrailerCarousel videos={videos} />
+            </div>
+          )}
+        </div>
       </div>
 
       {(directors.length > 0 || cast.length) > 0 && (
@@ -203,9 +314,30 @@ const Movie = () => {
           </div>
         </>)}
 
+      <div className="w-3/4 mt-10">
+        <h2 className="text-white text-xl mb-4">Reviews</h2>
+        <div className="space-y-4">
+          {reviews.length > 0 ? (
+            reviews.map((review, index) => (
+              <div key={index} className="bg-gray-900 p-4 rounded-lg">
+                <div className="flex justify-between items-center">
+                  <div className="text-sky-400 font-semibold">{review.author}</div>
+                  <div className="text-gray-400 text-sm">
+                    {new Date(review.created_at).toLocaleDateString()}
+                  </div>
+                </div>
+                <div className="text-gray-200 mt-2">{review.content.slice(0, 600) + "..."}</div>
+              </div>
+            ))
+          ) : (
+            <div className="text-gray-400">No reviews available</div>
+          )}
+        </div>
+      </div>
 
-      <div className="relative w-full">
-        <h2 className="text-2xl text-white font-bold ml-20">Recommendations</h2>
+
+      <div className="relative w-full mt-10">
+        <h2 className="text-2xl text-white font-bold ml-20">More like this</h2>
         <MovieList Class={isTVShow ? "tv" : "movie"} Subclass="recommendations" type={`/${id}/`} style1="overflow-hidden" style2="overflow-x-scroll ml-8 pl-9" />
       </div>
       <div className="flex flex-wrap justify-center mt-32 w-4/5 mb-16">

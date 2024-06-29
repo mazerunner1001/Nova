@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const SearchBar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsExpanded(false);
+    setSearchQuery("");
+    setSearchResults([]);
+  }, [location.pathname]);
 
   const handleSearchClick = () => {
     setIsExpanded(!isExpanded);
@@ -37,20 +45,31 @@ const SearchBar = () => {
           ...movieData.results.map((item) => ({ ...item, media_type: "movie" })),
           ...tvData.results.map((item) => ({ ...item, media_type: "tv" }))
         ];
-        
+
         // Sort by popularity in descending order
         combinedResults.sort((a, b) => b.popularity - a.popularity);
-        
+
         setSearchResults(combinedResults);
+        setHighlightedIndex(-1);
       })
       .catch((err) => console.error("Failed to fetch data: ", err));
   };
 
   const handleResultClick = (mediaType, id) => {
     navigate(`/${mediaType}/${id}`);
-    setIsExpanded(false);
-    setSearchQuery("");
-    setSearchResults([]);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "ArrowDown") {
+      setHighlightedIndex((prevIndex) =>
+        prevIndex < searchResults.length - 1 ? prevIndex + 1 : prevIndex
+      );
+    } else if (e.key === "ArrowUp") {
+      setHighlightedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : 0));
+    } else if (e.key === "Enter" && highlightedIndex >= 0) {
+      const selectedResult = searchResults[highlightedIndex];
+      handleResultClick(selectedResult.media_type, selectedResult.id);
+    }
   };
 
   return (
@@ -68,6 +87,7 @@ const SearchBar = () => {
           placeholder="Search..."
           value={searchQuery}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           style={{ display: isExpanded ? "block" : "none" }}
         />
       </div>
@@ -78,12 +98,15 @@ const SearchBar = () => {
         <FaSearch className="text-lg" />
       </button>
       {isExpanded && searchQuery && searchResults.length > 0 && (
-        <div className="absolute top-10 left-0 w-full bg-black text-white p-4 rounded-md shadow-lg z-10 max-h-96 overflow-scroll">
-          {searchResults.map((item) => (
+        <div className="absolute top-10 left-0 w-full bg-black text-white rounded-md shadow-lg z-10 max-h-96 overflow-scroll">
+          {searchResults.map((item, index) => (
             <div
               key={item.id}
-              className="py-2 border-b border-gray-700 last:border-0 cursor-pointer"
+              className={`py-2 border-b border-gray-700 p-4 last:border-0 cursor-pointer ${
+                index === highlightedIndex ? "bg-gray-700" : ""
+              }`}
               onClick={() => handleResultClick(item.media_type, item.id)}
+              onMouseEnter={() => setHighlightedIndex(index)}
             >
               {item.title || item.name} (
               {new Date(item.release_date || item.first_air_date).getFullYear()}
