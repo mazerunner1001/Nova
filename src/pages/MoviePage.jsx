@@ -101,10 +101,10 @@ const Movie = () => {
                 <span className="movie__genre p-2 border-2 border-white rounded-2xl" key={genre.id}>{genre.name}</span>
               )) : ""}
             </div>
-            <div className="mt-5 mb-5 space-x-4">
+            <div className="mt-5 mb-5 space-x-4 flex flex-wrap">
               {keywords && keywords.length > 0 ? (
                 keywords.slice(0, 4).map(keyword => (
-                  <span className="p-2 border-2 border-white rounded-2xl" key={keyword.id}>{keyword.name}</span>
+                  <span className="p-2 mt-1 border-2 border-white rounded-2xl" key={keyword.id}>{keyword.name}</span>
                 ))) : ("")}
             </div>
             {trailer && (
