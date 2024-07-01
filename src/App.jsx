@@ -17,6 +17,7 @@ import ProfilePage from './pages/ProfilePage';
 import PrivateRoute from './components/PrivateRoute';
 import CastDetail from "../src/pages/CastDetail";
 import UpdateProfile from "./pages/UpdateProfile";
+import CastPhotos from './pages/CastPhotos';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
       <Route path='genre/:genre' element={<><NavbarExplore /><MovieList2/><Footer /></>} />
       <Route path="/:mediaType/:id" element={<Movie />} />
       <Route path="/person/:id" element={<CastDetail />} />
+      <Route path="/photos/:id" element={<CastPhotos />} />
       {/* Private Routes */}
       <Route path='' element={<PrivateRoute />}>
         <Route path='profile' element={<ProfilePage />} />

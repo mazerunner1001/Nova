@@ -9,11 +9,13 @@ import Ad1 from '../assets/Designer (1).png';
 import Ad2 from '../assets/Designer (2).png';
 import Ad3 from '../assets/Designer (3).png';
 
+
 const MovieSection = ({ title, type, Class, style1 = "", style2 = "" }) => {
   const [movies, setMovies] = useState([]);
+  const apiKey = import.meta.env.VITE_API_KEY;
 
   useEffect(() => {
-    fetch(`https://api.themoviedb.org/3/${Class}/${type}?api_key=1ca2e666a13734cae0b5102c1092b9c0&language=en-US`)
+    fetch(`https://api.themoviedb.org/3/${Class}/${type}?api_key=${apiKey}&language=en-US`)
       .then(res => res.json())
       .then(data => setMovies(data.results));
   }, [type]);
@@ -51,10 +53,10 @@ const Advertisement = ({ image = 'https://via.placeholder.com/150', title = 'Tit
 
 const ExplorePage = () => {
   const [popularMovies, setPopularMovies] = useState([]);
-
+  const apiKey = import.meta.env.VITE_API_KEY;
 
   useEffect(() => {
-    fetch("https://api.themoviedb.org/3/movie/now_playing?api_key=1ca2e666a13734cae0b5102c1092b9c0&language=en-US")
+    fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US`)
       .then(res => res.json())
       .then(data => setPopularMovies(data.results));
   }, []);

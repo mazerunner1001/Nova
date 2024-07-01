@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Cards from "./Card";
 
+
 const MovieList2 = () => {
   const [movieList, setMovieList] = useState([]);
   const [tvList, setTvList] = useState([]);
@@ -14,6 +15,7 @@ const MovieList2 = () => {
   const [moviePageInput, setMoviePageInput] = useState(moviePage);
   const [tvPageInput, setTvPageInput] = useState(tvPage);
   const { genre } = useParams();
+  const apiKey = import.meta.env.VITE_API_KEY;
 
   useEffect(() => {
     getMovies();
@@ -21,7 +23,6 @@ const MovieList2 = () => {
   }, [genre, moviePage, tvPage]);
 
   const getMovies = () => {
-    const apiKey = "1ca2e666a13734cae0b5102c1092b9c0"; // Replace with your API key
     const url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=${genre}&language=en-US&page=${moviePage}`;
 
     fetch(url)
@@ -35,7 +36,6 @@ const MovieList2 = () => {
   };
 
   const getTVShows = () => {
-    const apiKey = "1ca2e666a13734cae0b5102c1092b9c0"; // Replace with your API key
     const tvurl = `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&with_genres=${genre}&language=en-US&page=${tvPage}`;
 
     fetch(tvurl)

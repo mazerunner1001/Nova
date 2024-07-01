@@ -8,7 +8,7 @@ import MoviePlaceholder from '../assets/Movie_Placeholder.jpg';
 import Backdrop from '../assets/Backdrop.jpg';
 import MovieTrailerCarousel from '../components/MovieTrailerCarousel'; // Import the new component
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-
+import ReviewsSection from "../components/ReviewSection";
 
 const Movie = () => {
   const [currentDetail, setCurrentDetail] = useState(null);
@@ -25,6 +25,7 @@ const Movie = () => {
   const isTVShow = window.location.pathname.includes("/tv/");
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
+  const apiKey = import.meta.env.VITE_API_KEY;
 
   const openModal = (filePath) => {
     setSelectedImage(filePath);
@@ -44,7 +45,7 @@ const Movie = () => {
 
 
   const getData = () => {
-    fetch(`https://api.themoviedb.org/3/${isTVShow ? 'tv' : 'movie'}/${id}?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`)
+    fetch(`https://api.themoviedb.org/3/${isTVShow ? 'tv' : 'movie'}/${id}?api_key=${apiKey}&language=en-US`)
       .then(res => res.json())
       .then(data => {
         setCurrentDetail(data);
@@ -54,36 +55,36 @@ const Movie = () => {
   };
 
   const getAdditionalData = () => {
-    fetch(`https://api.themoviedb.org/3/${isTVShow ? 'tv' : 'movie'}/${id}/credits?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`)
+    fetch(`https://api.themoviedb.org/3/${isTVShow ? 'tv' : 'movie'}/${id}/credits?api_key=${apiKey}&language=en-US`)
       .then(res => res.json())
       .then(data => {
         setCast(data.cast || []);
         setCrew(data.crew || []);
       });
 
-    fetch(`https://api.themoviedb.org/3/${isTVShow ? 'tv' : 'movie'}/${id}/videos?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`)
+    fetch(`https://api.themoviedb.org/3/${isTVShow ? 'tv' : 'movie'}/${id}/videos?api_key=${apiKey}&language=en-US`)
       .then(res => res.json())
       .then(data => setVideos(data.results || []));
 
-    fetch(`https://api.themoviedb.org/3/${isTVShow ? 'tv' : 'movie'}/${id}/keywords?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`)
+    fetch(`https://api.themoviedb.org/3/${isTVShow ? 'tv' : 'movie'}/${id}/keywords?api_key=${apiKey}&language=en-US`)
       .then(res => res.json())
       .then(data => setKeywords(isTVShow ? data.results || [] : data.keywords || []));
 
-    fetch(`https://api.themoviedb.org/3/${isTVShow ? 'tv' : 'movie'}/${id}/watch/providers?api_key=4e44d9029b1270a757cddc766a1bcb63`)
+    fetch(`https://api.themoviedb.org/3/${isTVShow ? 'tv' : 'movie'}/${id}/watch/providers?api_key=${apiKey}`)
       .then(res => res.json())
       .then(data => setWatchProviders(data.results.US ? data.results.US.flatrate || [] : []));
 
-    fetch(`https://api.themoviedb.org/3/${isTVShow ? 'tv' : 'movie'}/${id}/images?api_key=4e44d9029b1270a757cddc766a1bcb63`)
+    fetch(`https://api.themoviedb.org/3/${isTVShow ? 'tv' : 'movie'}/${id}/images?api_key=${apiKey}`)
       .then(res => res.json())
       .then(data => setImages(data.backdrops || []));
 
-    fetch(`https://api.themoviedb.org/3/${isTVShow ? 'tv' : 'movie'}/${id}/reviews?api_key=4e44d9029b1270a757cddc766a1bcb63`)
+    fetch(`https://api.themoviedb.org/3/${isTVShow ? 'tv' : 'movie'}/${id}/reviews?api_key=${apiKey}`)
       .then(res => res.json())
       .then(data => setReviews(data.results || []));
   };
 
   const getReleaseDates = (movieId) => {
-    fetch(`https://api.themoviedb.org/3/movie/${movieId}/release_dates?api_key=4e44d9029b1270a757cddc766a1bcb63`)
+    fetch(`https://api.themoviedb.org/3/movie/${movieId}/release_dates?api_key=${apiKey}`)
       .then(res => res.json())
       .then(data => {
         console.log('Release Dates Data:', data); // Add this line
@@ -105,7 +106,7 @@ const Movie = () => {
     navigate(`/person/${personId}`);
   };
 
-  console.log(currentDetail);
+
 
   const directors = crew.filter(member => member.job === "Director");
   const trailer = videos.find(video => video.type === "Trailer");
@@ -314,27 +315,7 @@ const Movie = () => {
           </div>
         </>)}
 
-      <div className="w-3/4 mt-10">
-        <h2 className="text-white text-xl mb-4">Reviews</h2>
-        <div className="space-y-4">
-          {reviews.length > 0 ? (
-            reviews.map((review, index) => (
-              <div key={index} className="bg-gray-900 p-4 rounded-lg">
-                <div className="flex justify-between items-center">
-                  <div className="text-sky-400 font-semibold">{review.author}</div>
-                  <div className="text-gray-400 text-sm">
-                    {new Date(review.created_at).toLocaleDateString()}
-                  </div>
-                </div>
-                <div className="text-gray-200 mt-2">{review.content.slice(0, 600) + "..."}</div>
-              </div>
-            ))
-          ) : (
-            <div className="text-gray-400">No reviews available</div>
-          )}
-        </div>
-      </div>
-
+      <ReviewsSection reviews={reviews} />
 
       <div className="relative w-full mt-10">
         <h2 className="text-2xl text-white font-bold ml-20">More like this</h2>

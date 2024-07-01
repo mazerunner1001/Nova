@@ -10,6 +10,7 @@ const MovieList = ({ type = "popular", Class = "movie", Subclass = "", style1 = 
   const [totalPages, setTotalPages] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
   const [pageInput, setPageInput] = useState(currentPage);
+  const apiKey = import.meta.env.VITE_API_KEY;
 
   useEffect(() => {
     getData();
@@ -19,9 +20,9 @@ const MovieList = ({ type = "popular", Class = "movie", Subclass = "", style1 = 
     let url = "";
 
     if (type === "trending") {
-      url = `https://api.themoviedb.org/3/trending/all/day?api_key=1ca2e666a13734cae0b5102c1092b9c0&language=en-US&page=${currentPage}`;
+      url = `https://api.themoviedb.org/3/trending/all/day?api_key=${apiKey}&language=en-US&page=${currentPage}`;
     } else {
-      url = `https://api.themoviedb.org/3/${Class}/${type}${Subclass}?api_key=1ca2e666a13734cae0b5102c1092b9c0&language=en-US&page=${currentPage}`;
+      url = `https://api.themoviedb.org/3/${Class}/${type}${Subclass}?api_key=${apiKey}&language=en-US&page=${currentPage}`;
     }
 
     fetch(url)

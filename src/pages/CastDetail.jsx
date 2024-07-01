@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import NavbarExplore from "../components/NavbarExplore";
 import MovieList from "../components/MovieListCast";
 import Footer from "../components/Footer";
@@ -9,17 +9,19 @@ const CastDetail = () => {
   const [castDetails, setCastDetails] = useState(null);
   const [castMovies, setCastMovies] = useState([]);
   const [castTVShows, setCastTVShows] = useState([]);
+  const [photosCount, setPhotosCount] = useState(0);
   const [error, setError] = useState(null);
   const { id } = useParams();
+  const apiKey = import.meta.env.VITE_API_KEY;
 
   useEffect(() => {
     fetchCastDetails();
     fetchCastMovies();
     fetchCastTVShows();
+    fetchPhotosCount();
   }, [id]);
 
   const fetchCastDetails = () => {
-    const apiKey = "1ca2e666a13734cae0b5102c1092b9c0";
     const url = `https://api.themoviedb.org/3/person/${id}?api_key=${apiKey}&language=en-US`;
 
     fetch(url)
@@ -34,7 +36,6 @@ const CastDetail = () => {
   };
 
   const fetchCastMovies = () => {
-    const apiKey = "1ca2e666a13734cae0b5102c1092b9c0";
     const url = `https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${apiKey}&language=en-US`;
 
     fetch(url)
@@ -49,7 +50,6 @@ const CastDetail = () => {
   };
 
   const fetchCastTVShows = () => {
-    const apiKey = "1ca2e666a13734cae0b5102c1092b9c0";
     const url = `https://api.themoviedb.org/3/person/${id}/tv_credits?api_key=${apiKey}&language=en-US`;
 
     fetch(url)
@@ -60,6 +60,19 @@ const CastDetail = () => {
       .catch((err) => {
         console.error("Failed to fetch cast TV shows: ", err);
         setError("Failed to fetch cast TV shows.");
+      });
+  };
+
+  const fetchPhotosCount = () => {
+    const url = `https://api.themoviedb.org/3/person/${id}/images?api_key=${apiKey}`;
+
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setPhotosCount(data.profiles.length);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch photos count: ", err);
       });
   };
 
@@ -87,12 +100,32 @@ const CastDetail = () => {
       <NavbarExplore />
       <div className="text-white min-h-screen p-6">
         <div className="container mt-16 mx-auto flex flex-col md:flex-row items-center">
-          <div className="md:w-1/3 flex justify-center">
+          <div className="md:w-1/3 flex justify-center relative">
             <img
               src={profile_path ? `https://image.tmdb.org/t/p/w500${profile_path}` : profileicon}
               alt={name}
               className="rounded-lg shadow-md"
             />
+            <Link
+              to={`/photos/${id}`}
+              className="absolute bottom-2 right-2 text-white bg-black bg-opacity-80 p-2 rounded-md flex items-center"
+            >
+              <span className="mr-2">{photosCount}</span>
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M15 10l4.55-4.55M15 10l4.55-4.55M10 15l4.55-4.55M10 15l4.55-4.55M10 15L6.15 10.55m0 0L1.5 6m0 0L1.5 6m4.65 4.55L6.15 10.55m0 0L1.5 6"
+                ></path>
+              </svg>
+            </Link>
           </div>
           <div className="md:w-2/3 md:pl-10 mt-6 md:mt-0">
             <h2 className="text-4xl font-bold mb-4">{name}</h2>

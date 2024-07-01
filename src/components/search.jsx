@@ -9,6 +9,7 @@ const SearchBar = () => {
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const navigate = useNavigate();
   const location = useLocation();
+  const apiKey = import.meta.env.VITE_API_KEY;
 
   useEffect(() => {
     setIsExpanded(false);
@@ -32,27 +33,30 @@ const SearchBar = () => {
     }
   };
 
-  const fetchSearchResults = (query) => {
-    const apiKey = "1ca2e666a13734cae0b5102c1092b9c0";
+  const fetchSearchResults = async (query) => {
     const movieUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${query}`;
     const tvUrl = `https://api.themoviedb.org/3/search/tv?api_key=${apiKey}&query=${query}`;
 
-    Promise.all([fetch(movieUrl), fetch(tvUrl)])
-      .then(async ([movieRes, tvRes]) => {
-        const movieData = await movieRes.json();
-        const tvData = await tvRes.json();
-        const combinedResults = [
-          ...movieData.results.map((item) => ({ ...item, media_type: "movie" })),
-          ...tvData.results.map((item) => ({ ...item, media_type: "tv" }))
-        ];
+    try {
+      const [movieRes, tvRes] = await Promise.all([fetch(movieUrl), fetch(tvUrl)]);
+      if (!movieRes.ok || !tvRes.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      const movieData = await movieRes.json();
+      const tvData = await tvRes.json();
 
-        // Sort by popularity in descending order
-        combinedResults.sort((a, b) => b.popularity - a.popularity);
+      const combinedResults = [
+        ...movieData.results.map((item) => ({ ...item, media_type: "movie" })),
+        ...tvData.results.map((item) => ({ ...item, media_type: "tv" }))
+      ];
 
-        setSearchResults(combinedResults);
-        setHighlightedIndex(-1);
-      })
-      .catch((err) => console.error("Failed to fetch data: ", err));
+      combinedResults.sort((a, b) => b.popularity - a.popularity);
+
+      setSearchResults(combinedResults);
+      setHighlightedIndex(-1);
+    } catch (error) {
+      console.error("Failed to fetch data: ", error);
+    }
   };
 
   const handleResultClick = (mediaType, id) => {

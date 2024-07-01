@@ -7,6 +7,7 @@ const Cards = ({ movie }) => {
     const [isImageLoaded, setIsImageLoaded] = useState(false);
     const [showSkeleton, setShowSkeleton] = useState(true);
     const navigate = useNavigate();
+    
 
     useEffect(() => {
         setShowSkeleton(true);
@@ -31,7 +32,7 @@ const Cards = ({ movie }) => {
 
     return (
         <div onClick={handleClick} className="no-underline text-white cursor-pointer">
-            <div className="relative inline-block transition-transform duration-200 rounded-lg overflow-hidden m-1 cursor-pointer min-w-[180px] h-[270px] border border-gray-600 hover:scale-125 hover:z-50 shadow-lg">
+            <div className="relative inline-block transition-transform duration-200 rounded-lg overflow-hidden m-1 cursor-pointer w-[180px] h-[270px] border border-gray-600 hover:scale-125 hover:z-50 shadow-lg">
                 {showSkeleton && (
                     <div className="skeleton-animation"></div>
                 )}
