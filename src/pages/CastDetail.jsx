@@ -4,6 +4,7 @@ import NavbarExplore from "../components/NavbarExplore";
 import MovieList from "../components/MovieListCast";
 import Footer from "../components/Footer";
 import profileicon from "../assets/profileicon.jpg";
+import { IoMdImages } from "react-icons/io";
 
 const CastDetail = () => {
   const [castDetails, setCastDetails] = useState(null);
@@ -111,20 +112,8 @@ const CastDetail = () => {
               className="absolute bottom-2 right-2 text-white bg-black bg-opacity-80 p-2 rounded-md flex items-center"
             >
               <span className="mr-2">{photosCount}</span>
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M15 10l4.55-4.55M15 10l4.55-4.55M10 15l4.55-4.55M10 15l4.55-4.55M10 15L6.15 10.55m0 0L1.5 6m0 0L1.5 6m4.65 4.55L6.15 10.55m0 0L1.5 6"
-                ></path>
-              </svg>
+              <IoMdImages />
+              
             </Link>
           </div>
           <div className="md:w-2/3 md:pl-10 mt-6 md:mt-0">

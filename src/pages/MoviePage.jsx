@@ -37,6 +37,23 @@ const Movie = () => {
     setModalOpen(false);
   };
 
+  useEffect(() => {
+    if (modalOpen) {
+      document.body.style.overflow = 'hidden';
+      // Add event listener to handle clicks outside modal
+      const handleClickOutsideModal = (event) => {
+        if (!event.target.closest('.modal-content')) {
+          closeModal();
+        }
+      };
+      document.addEventListener('mousedown', handleClickOutsideModal);
+      return () => {
+        document.body.style.overflow = 'auto';
+        document.removeEventListener('mousedown', handleClickOutsideModal);
+      };
+    }
+  }, [modalOpen]);
+  
 
   useEffect(() => {
     getData();
@@ -215,8 +232,8 @@ const Movie = () => {
         </div>
       </div>
 
-       {/* Modal */}
-       {modalOpen && (
+      {/* Modal */}
+      {modalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="relative w-4/5 h-auto my-auto mx-auto">
             <button
@@ -255,15 +272,13 @@ const Movie = () => {
       </div>
 
 
-      <div className="w-4/5 items-center">
+      {videos.length > 0 && (<div className="w-4/5 items-center">
         <div className="mt-16 text-white h-[650px] ">
-          {videos.length > 0 && (
-            <div className="mt-8 mb-5 mr-8">
-              <MovieTrailerCarousel videos={videos} />
-            </div>
-          )}
+          <div className="mt-8 mb-5 mr-8">
+            <MovieTrailerCarousel videos={videos} />
+          </div>
         </div>
-      </div>
+      </div>)}
 
       {(directors.length > 0 || cast.length) > 0 && (
         <>
