@@ -137,7 +137,7 @@ const CastPhotos = () => {
                             </div>
                         )}
                     </div>
-                    <div className="text-gray-400 mt-4">Number of Photos: {photos.length}</div>
+                    <div className="text-gray-400 mt-4 ml-[1150px]">Number of Photos: {photos.length}</div>
                 </div>
             </div>
             <Footer />

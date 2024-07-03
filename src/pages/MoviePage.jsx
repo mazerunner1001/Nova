@@ -53,7 +53,7 @@ const Movie = () => {
       };
     }
   }, [modalOpen]);
-  
+
 
   useEffect(() => {
     getData();
@@ -161,28 +161,28 @@ const Movie = () => {
               </svg>
               <span className="movie__voteCount ml-4">{currentDetail ? `(${currentDetail.vote_count}) votes` : ""}</span>
             </div>
-            <div>{currentDetail ? (currentDetail.runtime ? `${currentDetail.runtime} mins` : `Seasons: ${currentDetail.number_of_seasons}`) : ""}</div>
-            <div>{currentDetail ? `Release date: ${currentDetail.release_date || currentDetail.first_air_date}` : ""}</div>
-            <div>{currentDetail && currentDetail.budget ? `Budget: $${currentDetail.budget.toLocaleString()}` : ""}</div>
-            <div>{currentDetail && currentDetail.revenue ? `Revenue: $${currentDetail.revenue.toLocaleString()}` : ""}</div>
+            <div className="flex items-center space-x-2 mt-2 mb-2">
+              <span>{currentDetail ? (currentDetail.runtime ? `${currentDetail.runtime} mins` : `Seasons: ${currentDetail.number_of_seasons}`) : ""}</span>
+              <span>|</span>
+              <span>{currentDetail ? `Release date: ${currentDetail.release_date || currentDetail.first_air_date}` : ""}</span>
+              <span>|</span>
+              <span>{currentDetail && currentDetail.budget ? `Budget: $${currentDetail.budget.toLocaleString()}` : ""}</span>
+              <span>|</span>
+              <span>{currentDetail && currentDetail.revenue ? `Revenue: $${currentDetail.revenue.toLocaleString()}` : ""}</span>
+            </div>
             <div>{currentDetail && currentDetail.spoken_languages ? `Languages: ${currentDetail.spoken_languages.map(lang => lang.name).join(", ")}` : ""}</div>
             <div>{currentDetail && currentDetail.production_countries ? `Countries: ${currentDetail.production_countries.map(country => country.name).join(", ")}` : ""}</div>
             <div className=" mt-5 mb-5 space-x-4">
               {currentDetail && currentDetail.genres ? currentDetail.genres.map(genre => (
-                <span className="movie__genre p-2 border-2 border-white rounded-2xl" key={genre.id}>{genre.name}</span>
+                <span className="p-2 border-2 border-white rounded-2xl" key={genre.id}>{genre.name}</span>
               )) : ""}
             </div>
             <div className="mt-5 mb-5 space-x-4 flex flex-wrap">
               {keywords && keywords.length > 0 ? (
                 keywords.slice(0, 4).map(keyword => (
-                  <span className="p-2 mt-1 border-2 border-white rounded-2xl" key={keyword.id}>{keyword.name}</span>
+                  <span className="p-2 border-2 border-white rounded-2xl" key={keyword.id}>{keyword.name}</span>
                 ))) : ("")}
             </div>
-            {trailer && (
-              <div className="mt-8 mb-5 mr-8 hover:underline">
-                <a href={`https://www.youtube.com/watch?v=${trailer.key}`} target="_blank" rel="noopener noreferrer" className="text-blue-300">Watch Trailer on YouTube</a>
-              </div>
-            )}
           </div>
           <div className="my-8 flex-0.8 relative">
             <div className="text-xl mb-5 font-semibold">Synopsis</div>
@@ -214,13 +214,20 @@ const Movie = () => {
         )}
       </div>
 
-      <div className="w-3/4 mt-40">
-        <h2 className="text-white text-xl mb-4">Images</h2>
-        <div id="no-scrollbar" className="flex overflow-x-auto space-x-4">
+      {videos.length > 0 && (<div className="w-3/4 items-center">
+        <div className="mt-40 text-white h-[650px] ">
+          <div className="mt-8 mb-5 mr-8">
+            <MovieTrailerCarousel videos={videos} />
+          </div>
+        </div>
+      </div>)}
+
+      <div className="w-3/4 mt-16">
+        <div id="no-scrollbar" className="flex overflow-x-auto space-x-3">
           {images.length > 0 ? (
             images.map((image, index) => (
               <img
-                className="w-56 h-32 object-cover rounded-lg cursor-pointer"
+                className="w-56 h-32 object-cover rounded-md cursor-pointer"
                 src={`https://image.tmdb.org/t/p/original${image.file_path}`}
                 alt={`Backdrop ${index + 1}`}
                 onClick={() => openModal(image.file_path)}
@@ -250,35 +257,6 @@ const Movie = () => {
           </div>
         </div>
       )}
-
-      <div className="w-3/4 mt-10">
-        <h2 className="text-white text-xl mb-4">Watch Providers</h2>
-        <div className="flex overflow-x-auto space-x-4">
-          {watchProviders.length > 0 ? (
-            watchProviders.map((provider, index) => (
-              <div key={index} className="flex flex-col items-center">
-                <img
-                  className="w-16 h-16 object-cover rounded-full"
-                  src={`https://image.tmdb.org/t/p/original${provider.logo_path}`}
-                  alt={provider.provider_name}
-                />
-                <div className="text-white text-sm mt-2">{provider.provider_name}</div>
-              </div>
-            ))
-          ) : (
-            <div className="text-gray-400">No watch providers available</div>
-          )}
-        </div>
-      </div>
-
-
-      {videos.length > 0 && (<div className="w-4/5 items-center">
-        <div className="mt-16 text-white h-[650px] ">
-          <div className="mt-8 mb-5 mr-8">
-            <MovieTrailerCarousel videos={videos} />
-          </div>
-        </div>
-      </div>)}
 
       {(directors.length > 0 || cast.length) > 0 && (
         <>
@@ -314,7 +292,7 @@ const Movie = () => {
           </div>
         </>)}
 
-      {crew.length > 0 && (
+      {/* {crew.length > 0 && (
         <>
           <div className="overflow-hidden w-4/5 relative flex-1">
             <h2 className="text-2xl text-white font-bold mb-4">Crew</h2>
@@ -328,11 +306,35 @@ const Movie = () => {
               ))}
             </div>
           </div>
-        </>)}
+        </>)} */}
 
-      <ReviewsSection reviews={reviews} />
+        <hr className=" border-gray-700 w-4/5" />
 
-      <div className="relative w-full mt-10">
+      <div className="flex justify-between gap-8 w-4/5 divide-x divide-gray-700">
+        <ReviewsSection reviews={reviews} />
+        <div className="w-1/4 flex flex-col gap-4 mt-10 pl-8">
+          <h2 className="text-white text-xl mb-4">Watch Providers</h2>
+          <div className="flex flex-col space-y-6">
+            {watchProviders.length > 0 ? (
+              watchProviders.map((provider, index) => (
+                <div key={index} className="flex items-center gap-2">
+                  <img
+                    className="w-12 h-12 object-cover rounded-full"
+                    src={`https://image.tmdb.org/t/p/original${provider.logo_path}`}
+                    alt={provider.provider_name}
+                  />
+                  <div className="text-white text-sm">{provider.provider_name}</div>
+                </div>
+              ))
+            ) : (
+              <div className="text-gray-400">No watch providers available</div>
+            )}
+          </div>
+        </div>
+      </div>
+
+
+      <div className="relative w-full mt-16">
         <h2 className="text-2xl text-white font-bold ml-20">More like this</h2>
         <MovieList Class={isTVShow ? "tv" : "movie"} Subclass="recommendations" type={`/${id}/`} style1="overflow-hidden" style2="overflow-x-scroll ml-8 pl-9" />
       </div>

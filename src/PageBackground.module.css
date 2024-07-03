@@ -1,0 +1,91 @@
+/* PageBackground.module.css */
+
+:root {
+    --secondary-glow: conic-gradient(
+        from 10deg at 50% 50%,
+        #eb7494 0deg,
+        #ae77b2 55deg,
+        #97b5da 120deg,
+        #0099ca 160deg,
+        transparent 360deg
+    );
+
+    --third-glow: conic-gradient(
+        from 90deg at 50% 50%,
+        #ff8b7e 0deg,
+        #e24e6b 160deg,
+        #7ed2da 120deg,
+        #8bdce0 55deg,
+        transparent 360deg
+    );
+
+    --black-gradient: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+}
+
+.page-background {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Agency FB';
+    position: relative;
+    overflow: hidden;
+}
+
+.page-background::before,
+.page-background::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    opacity: 0.8;
+}
+
+.page-background::before {
+    background: var(--third-glow);
+    border-radius: 50%;
+    width: 75vw;
+    height: 75vw;
+    margin-left: -200px;
+    filter: blur(90px);
+    top: calc(50vh - 25vw);
+    left: calc(30vw);
+    animation: animateBefore 7s cubic-bezier(0.47, 0, 0.745, 0.715) infinite;
+}
+
+.page-background::after {
+    background: var(--secondary-glow);
+    border-radius: 50%;
+    width: 750px;
+    height: 1150px;
+    filter: blur(90px);
+    top: calc(50vh - 350px);
+    left: calc(30vw - 250px);
+    animation: animateBefore 5s cubic-bezier(0.47, 0, 0.745, 0.715) infinite;
+}
+
+@keyframes animateBefore {
+    0% {
+        transform: rotate(0deg);
+        transform: translateY(0);
+    }
+    50% {
+        transform: rotate(180deg);
+        transform: translateY(200);
+    }
+    100% {
+        transform: rotate(360deg);
+        transform: translateY(0);
+    }
+}
+
+/* Additional styles for the black area beside the signup form */
+.black-area {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 500px); /* Adjust as needed */
+    height: 100%;
+    background: var(--secondary-glow);
+    z-index: 2;
+    opacity: 0.7;
+}

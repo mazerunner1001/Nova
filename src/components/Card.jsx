@@ -46,7 +46,7 @@ const Cards = ({ movie }) => {
                     <div className="absolute bottom-0 left-0 h-[290px] w-full flex flex-col justify-end p-4 bg-gradient-to-t from-black to-transparent opacity-0 hover:opacity-100 transition-opacity duration-200">
                         <div className="font-extrabold text-base mb-2.5">{movie.original_title || movie.name || <span className="italic">N/A</span>}</div>
                         <div className="text-xs mb-1">
-                            {movie.release_date || movie.first_air_date || <span className="italic">N/A</span>}
+                            {movie.release_date || movie.first_air_date || (<span className="italic">N/A</span>)}
                             <div className="flex flex-wrap">
                                 <span className="float-right">{movie.vote_average || <span className="italic">N/A</span>}</span>
                                 <svg className="ml-1" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="14px" height="14px" viewBox="0 0 64 64" enableBackground="new 0 0 64 64">

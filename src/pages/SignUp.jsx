@@ -4,9 +4,15 @@ import logo from '../assets/logo.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import Footer from '../components/Footer';
 import { useSignupMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
-import Footer from '../components/Footer';
+import styles from '../PageBackground.module.css';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger'; // Import ScrollTrigger separately if needed
+gsap.registerPlugin(ScrollTrigger);
+
+
 
 function SignUp() {
     const [name, setName] = useState('');
@@ -56,11 +62,34 @@ function SignUp() {
         }
     };
 
+    const handleSubscribe = () => {
+        alert(`Subscribed with: ${email}`);
+        setEmail("");
+    };
+
+    useEffect(() => {
+        // Your ScrollTrigger animations setup here
+        const cards = document.querySelectorAll('.info-card');
+
+        cards.forEach((card) => {
+            gsap.from(card, {
+                y: 100,
+                opacity: 0,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 80%', // Adjust as needed
+                    end: '+=300', // Adjust as needed
+                    toggleActions: 'play none none reverse',
+                },
+            });
+        });
+    }, []);
+
     return (
         <>
-            <div className="relative ">
-                <img src={Designer} className="fixed inset-0 w-full h-full object-cover bg-gray-500 " alt="designer" />
-                <div className="absolute bg-black bg-opacity-40 inset-0 m-0"></div>
+            <div className={styles['page-background']}>
+                <div className="absolute bg-black bg-opacity-20 inset-0 m-0"></div>
                 <div className="relative flex bg-transparent items-center">
                     <img src={logo} loading="lazy" className="w-10 h-10 m-4 hover:animate-spin" alt="tailus logo" />
                     <h2 className="text-3xl text-white font-bold ">Project-X</h2>
@@ -98,30 +127,39 @@ function SignUp() {
                     </a>
                 </div>
                 <br />
-                <div className="relative w-full items-center justify-center text-center py-4 z-0 mt-12">
-                    <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-center text-white">Welcome to Project-X</h1>
-                    <p className="mt-6 text-lg text-center max-w-3xl lg:block hidden mx-auto text-white">Embark on a cinematic journey like never before. Join our vibrant community of movie enthusiasts where every frame sparks discussions, memories, and inspiration. Sign up today to explore the world of cinema with fellow aficionados and dive into a realm where every movie holds a story worth sharing.</p>
-                </div>
-                <br />
-
-                {/* Information Cards Section */}
-                <div className="relative container mx-auto px-6 py-10">
-                    <div className="grid sm:grid-cols-1 lg:grid-cols-3 gap-6 ">
-                        {InfoCard.map(({ title, description }, key) => (
-                            <div key={key} className="bg-black rounded-lg shadow-md p-0 transform hover:scale-105 transition-transform duration-300">
-                                {/* <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 via-teal-600 to-100% opacity-75 blur transition duration-500 group-hover:opacity-100"></div> */}
-                                <div className="relative bg-black text-white rounded-lg p-8 shadow-lg w-full text-center">
-                                    <h3 className="text-2xl font-semibold text-white">{title}</h3>
-                                    <p className="mt-2 text-gray-300 italic" >{description}</p>
-                                </div>
-                            </div>
-                        ))}
+                <div className="relative w-full items-center justify-center text-center z-0 mt-24">
+                    <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-[80px] tracking-tight text-center text-white">Welcome to Project-X</h1>
+                    <p className="mt-6 text-3xl text-center max-w-3xl lg:block hidden mx-auto text-white ">Embark on a cinematic journey like never before. Join our vibrant community of movie enthusiasts where every frame sparks discussions, memories, and inspiration. Sign up today to explore the world of cinema with fellow aficionados and dive into a realm where every movie holds a story worth sharing.</p>
+                    <div className="relative flex items-center justify-center mt-12">
+                        <Link to="/">
+                            <button className="bg-black text-white text-2xl px-8 py-3 rounded-full hover:bg-white hover:text-black transition duration-300">Explore</button>
+                        </Link>
+                        <div className="inline-flex items-center bg-gradient-to-r from-gray-800 to-gray-900 rounded-full ml-8 divide-x divide-black">
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Enter your email"
+                                className="rounded-l-lg px-4 py-2 outline-none text-black text-lg w-full"
+                            />
+                            <button
+                                onClick={handleSubscribe}
+                                className="rounded-r-lg bg-black px-4 py-2 flex items-center text-lg justify-center text-white hover:text-black hover:bg-white"
+                            >
+                                <svg className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                                Subscribe
+                            </button>
+                        </div>
                     </div>
+                    <div className=" items-stretch bg-white h-[400px] w-[2px] mx-auto mt-8"></div>
                 </div>
 
-                <div className="relative container pb-16 m-auto text-black mt-12 md:px-12">
-                    <div className="m-auto md:w-8/12 lg:w-6/12 xl:w-6/12 rounded-3xl bg-black shadow-3xl relative">
-                        <div className="p-6 sm:p-16">
+
+                <div className="relative container pb-16 m-auto text-black md:px-12 mb-20">
+                    <div className="m-auto md:w-8/12 lg:w-6/12 xl:w-6/12  bg-transparent shadow-3xl relative ">
+                        <div className="p-6 sm:p-16 bg-black rounded-3xl border bg-opacity-35">
                             <h1 className="text-2xl font-bold leading-tight tracking-tight text-white md:text-3xl text-center">Create an account</h1>
                             <div className="2xl:flex my-12 items-center justify-center space-y-4 2xl:space-x-6 2xl:space-y-0">
                                 <button className="sm:ml-12 md:ml-3 lg:ml-5 xl:ml-16 2xl:ml-0 h-12 pl-6 pr-10 2xl:px-6 border-2 border-gray-300 rounded-full transition duration-300 hover:border-teal-400 active:bg-teal-300">
@@ -228,16 +266,19 @@ function SignUp() {
                                         </label>
                                     </div>
                                 </div>
-                                <button
-                                    className="w-full text-white bg-teal-600 hover:bg-teal-800 active:bg-teal-500 font-medium rounded-lg text-md px-5 py-2.5 text-center"
-                                >
-                                    Create an account
-                                </button>
-                                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                                <div className="flex items-center mt-4 mb-4 justify-center">
+                                    <div className="group relative">
+                                        <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-sky-500 to-rose-400 opacity-75 blur transition duration-500 group-hover:opacity-100"></div>
+                                        <button className="relative rounded-full bg-black px-24 py-3 text-lg text-white">
+                                            Create an account
+                                        </button>
+                                    </div>
+                                </div>
+                                <p className="text-md font-light text-gray-500 dark:text-gray-400">
                                     Already have an account?{" "}
                                     <Link
                                         to="/login"
-                                        className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                                        className="text-md text-gray-500 hover:underline dark:text-primary-500"
                                     >
                                         Login here
                                     </Link>
@@ -252,7 +293,7 @@ function SignUp() {
                     </div>
                 </div>
                 {/* <Footer /> */}
-            </div>
+            </div >
 
 
         </>

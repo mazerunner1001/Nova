@@ -31,21 +31,21 @@ const ReviewsSection = ({ reviews }) => {
                     className="w-10 h-10 rounded-full mr-2"
                   />
                   {console.log(review.author_details.avatar_path)}
-                  <div className="text-sky-400 font-semibold">{review.author}</div>
+                  <div className="text-white font-semibold">{review.author}</div>
                 </div>
                 <div className="text-gray-400 text-sm">
                   {new Date(review.created_at).toLocaleDateString()}
                 </div>
               </div>
-              <div className="text-yellow-400 mt-2">
+              <div className="text-sky-500 mt-2">
                 {review.author_details.rating
                   ? '★'.repeat(review.author_details.rating)
                   : 'No rating'}
               </div>
-              <div className="text-gray-200 mt-2">
+              <div className="text-gray-200 text-[16px] mt-2">
                 <ReactMarkdown skipHtml={true}>
                   {review.content.length > 300 && !expandedReviews.includes(index)
-                    ? review.content.slice(0, 300) + '...'
+                    ? review.content.slice(0, 200) + '...'
                     : review.content}
                 </ReactMarkdown>
               </div>
