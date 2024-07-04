@@ -82,7 +82,7 @@ const CastDetail = () => {
   }
 
   if (!castDetails) {
-    return <div className="text-white text-center">Loading...</div>;
+    return <div className="text-white text-center mt-[350px]">Loading...</div>;
   }
 
   const {

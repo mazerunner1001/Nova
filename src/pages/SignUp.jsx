@@ -89,7 +89,7 @@ function SignUp() {
     return (
         <>
             <div className={styles['page-background']}>
-                <div className="absolute bg-black bg-opacity-20 inset-0 m-0"></div>
+                <div className="absolute bg-black bg-opacity-30 inset-0 m-0"></div>
                 <div className="relative flex bg-transparent items-center">
                     <img src={logo} loading="lazy" className="w-10 h-10 m-4 hover:animate-spin" alt="tailus logo" />
                     <h2 className="text-3xl text-white font-bold ">Project-X</h2>
@@ -126,8 +126,7 @@ function SignUp() {
                         </span>
                     </a>
                 </div>
-                <br />
-                <div className="relative w-full items-center justify-center text-center z-0 mt-24">
+                <div className="relative w-full items-center justify-center text-center styles.black-area z-0 mt-24">
                     <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-[80px] tracking-tight text-center text-white">Welcome to Project-X</h1>
                     <p className="mt-6 text-3xl text-center max-w-3xl lg:block hidden mx-auto text-white ">Embark on a cinematic journey like never before. Join our vibrant community of movie enthusiasts where every frame sparks discussions, memories, and inspiration. Sign up today to explore the world of cinema with fellow aficionados and dive into a realm where every movie holds a story worth sharing.</p>
                     <div className="relative flex items-center justify-center mt-12">
@@ -153,7 +152,7 @@ function SignUp() {
                             </button>
                         </div>
                     </div>
-                    <div className=" items-stretch bg-white h-[400px] w-[2px] mx-auto mt-8"></div>
+                    <div className=" items-stretch bg-white h-[200px] w-[2px] mx-auto mt-8"></div>
                 </div>
 
 
@@ -286,8 +285,8 @@ function SignUp() {
                             </form>
 
                             <div className="mt-24 space-y-4 text-gray-600 text-center ">
-                                <p className="text-xs">By proceeding, you agree to our <a href="#" className="underline">Terms of Use</a> and confirm you have read our <a href="#" className="underline">Privacy and Cookie Statement</a>.</p>
-                                <p className="text-xs">This site is protected by reCAPTCHA and the <a href="https://policies.google.com/privacy?hl=en-US" className="underline">Google Privacy Policy</a> and <a href="https://policies.google.com/terms?hl=en-US" className="underline">Terms of Service</a> apply.</p>
+                                <p className="text-s">By proceeding, you agree to our <a href="#" className="underline">Terms of Use</a> and confirm you have read our <a href="#" className="underline">Privacy and Cookie Statement</a>.</p>
+                                <p className="text-s">This site is protected by reCAPTCHA and the <a href="https://policies.google.com/privacy?hl=en-US" className="underline">Google Privacy Policy</a> and <a href="https://policies.google.com/terms?hl=en-US" className="underline">Terms of Service</a> apply.</p>
                             </div>
                         </div>
                     </div>

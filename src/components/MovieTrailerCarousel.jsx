@@ -6,7 +6,7 @@ const YoutubeSlide = ({ url }) => (
     <div className="video-container">
         <iframe
             width="800"
-            height="650"
+            height="500"
             src={url}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

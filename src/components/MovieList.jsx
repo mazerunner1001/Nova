@@ -1,8 +1,6 @@
-// MovieList.js
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Cards from "./Card";
-import CastCard from "./Card2";
 
 const MovieList = ({ type = "popular", Class = "movie", Subclass = "", style1 = "", style2 = "", showPagination = true }) => {
   const [movieList, setMovieList] = useState([]);
@@ -25,12 +23,21 @@ const MovieList = ({ type = "popular", Class = "movie", Subclass = "", style1 = 
       url = `https://api.themoviedb.org/3/${Class}/${type}${Subclass}?api_key=${apiKey}&language=en-US&page=${currentPage}`;
     }
 
+    console.log("Fetching data from URL:", url);
+
     fetch(url)
       .then(res => res.json())
       .then(data => {
-        setMovieList(data.results);
-        setTotalPages(data.total_pages);
-        setTotalResults(data.total_results);
+        console.log("API response data:", data);
+        if (data.results) {
+          setMovieList(data.results);
+          setTotalPages(data.total_pages || 1);
+          setTotalResults(data.total_results || 0);
+        } else {
+          setMovieList([]);
+          setTotalPages(1);
+          setTotalResults(0);
+        }
       })
       .catch(err => console.error("Failed to fetch data: ", err));
   };
@@ -63,10 +70,10 @@ const MovieList = ({ type = "popular", Class = "movie", Subclass = "", style1 = 
         </h2>
       )}
       <div id="no-scrollbar" className={`flex ${style2} py-[30px]`}>
-        {Subclass === "" || Subclass === "recommendations" ? (
+        {movieList && movieList.length > 0 ? (
           movieList.map(movie => <Cards key={movie.id} movie={movie} />)
         ) : (
-          movieList.map(cast => <CastCard key={cast.id} cast={cast} />)
+          <span className="text-gray-400 text-lg">No Recommendations</span>
         )}
       </div>
       {showPagination && !style1 && (

@@ -42,23 +42,23 @@
 .page-background::before {
     background: var(--third-glow);
     border-radius: 50%;
-    width: 75vw;
-    height: 75vw;
+    width: 50vw;
+    height: 50vw;
     margin-left: -200px;
     filter: blur(90px);
-    top: calc(50vh - 25vw);
-    left: calc(30vw);
+    top: calc(50vh - 200px);
+    left: calc(50vw - 200px);
     animation: animateBefore 7s cubic-bezier(0.47, 0, 0.745, 0.715) infinite;
 }
 
 .page-background::after {
     background: var(--secondary-glow);
     border-radius: 50%;
-    width: 750px;
-    height: 1150px;
+    width: 500px;
+    height: 750px;
     filter: blur(90px);
-    top: calc(50vh - 350px);
-    left: calc(30vw - 250px);
+    top: 200px;
+    left: calc(50vw - 200px);
     animation: animateBefore 5s cubic-bezier(0.47, 0, 0.745, 0.715) infinite;
 }
 
@@ -75,17 +75,4 @@
         transform: rotate(360deg);
         transform: translateY(0);
     }
-}
-
-/* Additional styles for the black area beside the signup form */
-.black-area {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100% - 500px); /* Adjust as needed */
-    height: 100%;
-    background: var(--secondary-glow);
-    z-index: 2;
-    opacity: 0.7;
 }

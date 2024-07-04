@@ -17,7 +17,7 @@ const ReviewsSection = ({ reviews }) => {
   };
 
   return (
-    <div className="w-4/5 mt-10">
+    <div className="w-full mt-10">
       <h2 className="text-white text-2xl font-bold mb-4">Reviews</h2>
       <div className="space-y-4">
         {reviews.length > 0 ? (
@@ -60,7 +60,7 @@ const ReviewsSection = ({ reviews }) => {
             </div>
           ))
         ) : (
-          <div className="text-gray-400">No reviews available</div>
+          <div className="text-gray-400 ml-16">No reviews available</div>
         )}
       </div>
       {loadedReviews < reviews.length && (

@@ -51,7 +51,7 @@ export default function Footer() {
               />
               <button
                 onClick={handleSubscribe}
-                className="mt-2 md:mt-0 ml-4 rounded-full bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+                className="mt-2 md:mt-0 ml-4 rounded-full bg-white px-4 py-2 font-bold text-black hover:bg-sky-400 hover:text-white"
               >
                 Subscribe
               </button>

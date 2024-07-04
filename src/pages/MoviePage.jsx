@@ -124,6 +124,9 @@ const Movie = () => {
   };
 
 
+  if (!currentDetail) {
+    return <div className="text-white text-center mt-[350px]">Loading...</div>;
+  }
 
   const directors = crew.filter(member => member.job === "Director");
   const trailer = videos.find(video => video.type === "Trailer");
@@ -163,11 +166,11 @@ const Movie = () => {
             </div>
             <div className="flex items-center space-x-2 mt-2 mb-2">
               <span>{currentDetail ? (currentDetail.runtime ? `${currentDetail.runtime} mins` : `Seasons: ${currentDetail.number_of_seasons}`) : ""}</span>
-              <span>|</span>
+              <span>{currentDetail ? `|` : ''}</span>
               <span>{currentDetail ? `Release date: ${currentDetail.release_date || currentDetail.first_air_date}` : ""}</span>
-              <span>|</span>
+              <span>{currentDetail && currentDetail.budget ? `|` : ''}</span>
               <span>{currentDetail && currentDetail.budget ? `Budget: $${currentDetail.budget.toLocaleString()}` : ""}</span>
-              <span>|</span>
+              <span>{currentDetail && currentDetail.revenue ? `|` : ''}</span>
               <span>{currentDetail && currentDetail.revenue ? `Revenue: $${currentDetail.revenue.toLocaleString()}` : ""}</span>
             </div>
             <div>{currentDetail && currentDetail.spoken_languages ? `Languages: ${currentDetail.spoken_languages.map(lang => lang.name).join(", ")}` : ""}</div>
@@ -260,7 +263,7 @@ const Movie = () => {
 
       {(directors.length > 0 || cast.length) > 0 && (
         <>
-          <div className="flex flex-col w-4/5 mt-20 space-y-12">
+          <div className="flex flex-col w-3/4 mt-20 space-y-12">
             <div className="flex space-x-4 w-full overflow-hidden relative">
               {directors.length > 0 && (
                 <div className="overflow-hidden relative w-auto">
@@ -308,10 +311,12 @@ const Movie = () => {
           </div>
         </>)} */}
 
-        <hr className=" border-gray-700 w-4/5" />
+      <hr className=" border-gray-700 w-4/5" />
 
       <div className="flex justify-between gap-8 w-4/5 divide-x divide-gray-700">
+      <div className="flex flex-col w-3/4 mt-16">
         <ReviewsSection reviews={reviews} />
+      </div>
         <div className="w-1/4 flex flex-col gap-4 mt-10 pl-8">
           <h2 className="text-white text-xl mb-4">Watch Providers</h2>
           <div className="flex flex-col space-y-6">
@@ -334,9 +339,15 @@ const Movie = () => {
       </div>
 
 
-      <div className="relative w-full mt-16">
+      <div className="relative w-11/12 mt-16">
         <h2 className="text-2xl text-white font-bold ml-20">More like this</h2>
-        <MovieList Class={isTVShow ? "tv" : "movie"} Subclass="recommendations" type={`/${id}/`} style1="overflow-hidden" style2="overflow-x-scroll ml-8 pl-9" />
+        <MovieList
+          Class={isTVShow ? "tv" : "movie"}
+          Subclass={`/recommendations`}
+          type={id}
+          style1="overflow-hidden"
+          style2="overflow-x-scroll ml-8 pl-9"
+        />
       </div>
       <div className="flex flex-wrap justify-center mt-32 w-4/5 mb-16">
         {currentDetail && currentDetail.production_companies && currentDetail.production_companies.map(company => (
