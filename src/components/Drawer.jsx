@@ -51,9 +51,9 @@ const SidebarWithBurgerMenu = () => {
           <img
             src={logo}
             alt="brand"
-            className="h-8 w-8"
+            className="w-12"
           />
-         <h1 className="text-white text-3xl font-bold">Project-X</h1>
+         <h1 className="text-white text-3xl font-bold">Nova</h1>
         </div>
         <div className="overflow-auto">
           <ul>

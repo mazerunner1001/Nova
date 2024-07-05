@@ -1,15 +1,15 @@
 <div align="center" display="flex">
    
-   # Project-X
+   # Nova
 </div>
 
-![GitHub contributors](https://img.shields.io/github/contributors/mazerunner1001/Project-X)
-![GitHub forks](https://img.shields.io/github/forks/mazerunner1001/Project-X)
-![GitHub stars](https://img.shields.io/github/stars/mazerunner1001/Project-X)
+![GitHub contributors](https://img.shields.io/github/contributors/mazerunner1001/Nova)
+![GitHub forks](https://img.shields.io/github/forks/mazerunner1001/Nova)
+![GitHub stars](https://img.shields.io/github/stars/mazerunner1001/Nova)
 
-Project-X is a comprehensive web application designed to offer users a seamless and intuitive experience when interacting with movies and TV shows. This application is built with modern web development technologies and adheres to the best practices in user interface design, ensuring a responsive and visually appealing user experience. Project-X includes robust features such as user authentication, profile management, and interactive information cards. The application is designed with a dark theme to enhance visual comfort and focus, making it ideal for prolonged usage.
+Nova is a comprehensive web application designed to offer users a seamless and intuitive experience when interacting with movies and TV shows. This application is built with modern web development technologies and adheres to the best practices in user interface design, ensuring a responsive and visually appealing user experience. Nova includes robust features such as user authentication, profile management, and interactive information cards. The application is designed with a dark theme to enhance visual comfort and focus, making it ideal for prolonged usage.
 
-The main objective of Project-X is to provide a platform where users can effortlessly browse, search, and explore detailed information about their favorite movies and TV shows. Whether it's viewing the latest releases, popular trends, or detailed cast and crew information, Project-X offers a holistic view of the entertainment world. Integration with external APIs ensures that the information is always up-to-date and accurate.
+The main objective of Nova is to provide a platform where users can effortlessly browse, search, and explore detailed information about their favorite movies and TV shows. Whether it's viewing the latest releases, popular trends, or detailed cast and crew information, Nova offers a holistic view of the entertainment world. Integration with external APIs ensures that the information is always up-to-date and accurate.
 
 ## Table of Contents
 
@@ -57,10 +57,10 @@ To get a local copy up and running follow these simple steps.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/yourusername/project-x.git
+   git clone https://github.com/yourusername/Nova.git
 2. Install NPM packages for both client and server
    ```sh
-    cd project-x
+    cd Nova
     npm install
     cd client
     npm install
@@ -70,13 +70,13 @@ To get a local copy up and running follow these simple steps.
 1. Run the development server
     ```sh
     Copy code
-    cd project-x
+    cd Nova
     npm run dev
 2. Open http://localhost:4000 to view it in the browser.
 
 ## Connecting to a Database
 
-To ensure Project-X functions correctly, you need to set up a connection to MongoDB (or any other DB of your choice) and configure the use of MONGO_URL. Follow the steps below to set up your environment:
+To ensure Nova functions correctly, you need to set up a connection to MongoDB (or any other DB of your choice) and configure the use of MONGO_URL. Follow the steps below to set up your environment:
 
 ### Connecting to MongoDB
 
@@ -106,29 +106,29 @@ Contributions are what make the open source community such an amazing place to l
 
 Praneeth Chandra - [@praneethswarna](https://x.com/praneethswarna) - [praneethchandra123](https://www.instagram.com/praneethchandra123/) - spraneethchandra123@gmail.com
 
-Project Link: https://github.com/mazerunner1001/project-x
+Project Link: https://github.com/mazerunner1001/Nova
 
 ## Screenshots
 
 ### Home Page
 
 <div style="display: flex; flex-wrap: wrap;">
-  <img src="https://github.com/mazerunner1001/Project-X/blob/master/src/assets/Images/homepage1.png" alt="Home Page" style="width: 45%; margin: 15px;" />
-  <img src="https://github.com/mazerunner1001/Project-X/blob/master/src/assets/Images/homepage2.png" alt="Home Page" style="width: 45%; margin: 15px;" />
+  <img src="https://github.com/mazerunner1001/Nova/blob/master/src/assets/Images/homepage1.png" alt="Home Page" style="width: 45%; margin: 15px;" />
+  <img src="https://github.com/mazerunner1001/Nova/blob/master/src/assets/Images/homepage2.png" alt="Home Page" style="width: 45%; margin: 15px;" />
 </div>
 
 ### Movie/TV page
 
 <div style="display: flex; flex-wrap: wrap;">
-  <img src="https://github.com/mazerunner1001/Project-X/blob/master/src/assets/Images/moviepag1.png" alt="Movie/TV Page" style="width: 45%; margin: 15px;" />
-  <img src="https://github.com/mazerunner1001/Project-X/blob/master/src/assets/Images/moviepage2.png" alt="Movie/TV Page" style="width: 45%; margin: 15px;" />
+  <img src="https://github.com/mazerunner1001/Nova/blob/master/src/assets/Images/moviepag1.png" alt="Movie/TV Page" style="width: 45%; margin: 15px;" />
+  <img src="https://github.com/mazerunner1001/Nova/blob/master/src/assets/Images/moviepage2.png" alt="Movie/TV Page" style="width: 45%; margin: 15px;" />
 </div>
 
 ### Cast/Crew page
 
-<img src="https://github.com/mazerunner1001/Project-X/blob/master/src/assets/Images/castpage.png" alt="Cast/Crew Page" style="width: 45%; margin: 15px;" />
+<img src="https://github.com/mazerunner1001/Nova/blob/master/src/assets/Images/castpage.png" alt="Cast/Crew Page" style="width: 45%; margin: 15px;" />
 
 ### Profile page
 
-<img src="https://github.com/mazerunner1001/Project-X/blob/master/src/assets/Images/profilepage.png" alt="Profile Page" style="width: 45%; margin: 15px;" />
+<img src="https://github.com/mazerunner1001/Nova/blob/master/src/assets/Images/profilepage.png" alt="Profile Page" style="width: 45%; margin: 15px;" />
 

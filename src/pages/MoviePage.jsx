@@ -141,7 +141,7 @@ const Movie = () => {
           <img className="w-full h-[500px] object-cover object-[0_35%]" src={currentDetail.backdrop_path ? `https://image.tmdb.org/t/p/original${currentDetail.backdrop_path}` : Backdrop} alt="Backdrop" />
         )}
         <div className="absolute bottom-64 right-0 pr-16 pl-6 py-2 bg-gray-900 border-2 border-l-white border-transparent text-white text-md">
-          {certification}
+          {certification ? certification : "NA"}
         </div>
       </div>
 
@@ -218,7 +218,7 @@ const Movie = () => {
       </div>
 
       {videos.length > 0 && (<div className="w-3/4 items-center">
-        <div className="mt-40 text-white h-[650px] ">
+        <div className="mt-40 text-white h-[500px] ">
           <div className="mt-8 mb-5 mr-8">
             <MovieTrailerCarousel videos={videos} />
           </div>

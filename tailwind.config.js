@@ -12,8 +12,8 @@ module.exports = withMT({
     extend: {
       colors: {
         primary: {
-          light: "#f7f7f7",
-          DEFAULT: "linear-gradient(109.6deg, rgb(0, 0, 0) 11.2%, rgb(8, 8, 8) 51.2%, rgb(39, 0, 54) 98.6%)",
+          light: "#442029",
+          DEFAULT: "linear-gradient(to right, #442029, #030303);",
           dark: "#222222",
         },
         secondary: {
@@ -142,7 +142,7 @@ module.exports = withMT({
         
       },
       fontFamily: {
-        sans: ["Barlow", "sans-serif"],
+        sans: ["Bahnschrift", "sans-serif"],
       },
       
     },

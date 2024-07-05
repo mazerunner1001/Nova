@@ -91,8 +91,8 @@ function SignUp() {
             <div className={styles['page-background']}>
                 <div className="absolute bg-black bg-opacity-30 inset-0 m-0"></div>
                 <div className="relative flex bg-transparent items-center">
-                    <img src={logo} loading="lazy" className="w-10 h-10 m-4 hover:animate-spin" alt="tailus logo" />
-                    <h2 className="text-3xl text-white font-bold ">Project-X</h2>
+                    <img src={logo} loading="lazy" className="w-12 m-4 hover:animate-spin" alt="tailus logo" />
+                    <h2 className="text-3xl text-white font-bold ">Nova</h2>
                 </div>
                 <div className="absolute right-12 top-4 flex justify-center space-x-8">
                     <a href="https://x.com/praneethswarna" className="cursor-pointer ">
@@ -127,7 +127,7 @@ function SignUp() {
                     </a>
                 </div>
                 <div className="relative w-full items-center justify-center text-center styles.black-area z-0 mt-24">
-                    <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-[80px] tracking-tight text-center text-white">Welcome to Project-X</h1>
+                    <h1 className="font-extrabold text-4xl sm:text-5xl lg:text-[80px] tracking-tight text-center text-white">Welcome to Nova</h1>
                     <p className="mt-6 text-3xl text-center max-w-3xl lg:block hidden mx-auto text-white ">Embark on a cinematic journey like never before. Join our vibrant community of movie enthusiasts where every frame sparks discussions, memories, and inspiration. Sign up today to explore the world of cinema with fellow aficionados and dive into a realm where every movie holds a story worth sharing.</p>
                     <div className="relative flex items-center justify-center mt-12">
                         <Link to="/">
@@ -161,16 +161,16 @@ function SignUp() {
                         <div className="p-6 sm:p-16 bg-black rounded-3xl border bg-opacity-35">
                             <h1 className="text-2xl font-bold leading-tight tracking-tight text-white md:text-3xl text-center">Create an account</h1>
                             <div className="2xl:flex my-12 items-center justify-center space-y-4 2xl:space-x-6 2xl:space-y-0">
-                                <button className="sm:ml-12 md:ml-3 lg:ml-5 xl:ml-16 2xl:ml-0 h-12 pl-6 pr-10 2xl:px-6 border-2 border-gray-300 rounded-full transition duration-300 hover:border-teal-400 active:bg-teal-300">
+                                <button className="sm:ml-12 md:ml-3 lg:ml-5 xl:ml-16 2xl:ml-0 h-12 pl-6 pr-10 2xl:px-6 border-2 border-gray-300 rounded-full transition duration-300 hover:border-sky-400 active:bg-sky-300">
                                     <div className="relative flex items-center space-x-8 justify-center">
                                         <img src="https://tailus.io/sources/blocks/social/preview/images/google.svg" className="absolute left-0 w-5" alt="google logo" />
-                                        <span className="block w-max font-semibold tracking-wide text-white text-sm transition duration-300 group-hover:text-teal-600 sm:text-base">Continue with Google</span>
+                                        <span className="block w-max font-semibold tracking-wide text-white text-sm transition duration-300 group-hover:text-sky-600 sm:text-base">Continue with Google</span>
                                     </div>
                                 </button>
-                                <button className="sm:ml-12 md:ml-3 lg:ml-5 xl:ml-16 group h-12 px-6 border-2 border-gray-300 rounded-full transition duration-300 hover:border-teal-400 active:bg-teal-300">
+                                <button className="sm:ml-12 md:ml-3 lg:ml-5 xl:ml-16 group h-12 px-6 border-2 border-gray-300 rounded-full transition duration-300 hover:border-sky-400 active:bg-sky-300">
                                     <div className="relative flex items-center space-x-8 justify-center">
                                         <img src="https://upload.wikimedia.org/wikipedia/en/0/04/Facebook_f_logo_%282021%29.svg" className="absolute left-0 w-5" alt="Facebook logo" />
-                                        <span className="block w-max font-semibold tracking-wide text-white text-sm transition duration-300 group-hover:text-teal-600 sm:text-base">Continue with Facebook</span>
+                                        <span className="block w-max font-semibold tracking-wide text-white text-sm transition duration-300 group-hover:text-sky-600 sm:text-base">Continue with Facebook</span>
                                     </div>
                                 </button>
                             </div>
@@ -246,7 +246,7 @@ function SignUp() {
                                             id="terms"
                                             aria-describedby="terms"
                                             type="checkbox"
-                                            className="w-4 h-4 border border-teal-500 rounded bg-teal-500 focus:ring-3 focus:ring-teal-500 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                                            className="w-4 h-4 border border-sky-500 rounded bg-sky-500 focus:ring-3 focus:ring-sky-500 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
                                             required=""
                                         />
                                     </div>
@@ -267,7 +267,7 @@ function SignUp() {
                                 </div>
                                 <div className="flex items-center mt-4 mb-4 justify-center">
                                     <div className="group relative">
-                                        <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-sky-500 to-rose-400 opacity-75 blur transition duration-500 group-hover:opacity-100"></div>
+                                        <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-rose-400 to-sky-500 opacity-75 blur transition duration-500 group-hover:opacity-100"></div>
                                         <button className="relative rounded-full bg-black px-24 py-3 text-lg text-white">
                                             Create an account
                                         </button>
@@ -284,8 +284,7 @@ function SignUp() {
                                 </p>
                             </form>
 
-                            <div className="mt-24 space-y-4 text-gray-600 text-center ">
-                                <p className="text-s">By proceeding, you agree to our <a href="#" className="underline">Terms of Use</a> and confirm you have read our <a href="#" className="underline">Privacy and Cookie Statement</a>.</p>
+                            <div className="mt-10 space-y-4 text-gray-600 text-center ">
                                 <p className="text-s">This site is protected by reCAPTCHA and the <a href="https://policies.google.com/privacy?hl=en-US" className="underline">Google Privacy Policy</a> and <a href="https://policies.google.com/terms?hl=en-US" className="underline">Terms of Service</a> apply.</p>
                             </div>
                         </div>

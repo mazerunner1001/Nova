@@ -46,8 +46,8 @@ const LoginPage = () => {
       <div className="absolute bg-black opacity-30 inset-0 z-0" />
       <div className="absolute bg-gradient-to-b h-20 from-black to-transparent inset-0 z-0">
         <div className="flex items-center justify-center absolute top-4 left-4 mb-6 space-x-2">
-          <img src={logo} alt="logo" className="w-10 mb-2 hover:animate-spin" />
-          <div className="text-4xl font-bold text-white">Project-X</div>
+          <img src={logo} alt="logo" className="w-12 mb-2 hover:animate-spin" />
+          <div className="text-4xl font-bold text-white">Nova</div>
         </div>
       </div>
 

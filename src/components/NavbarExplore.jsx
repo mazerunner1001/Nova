@@ -31,12 +31,12 @@ const NavbarExplore = () => {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 w-full flex py-2 z-10 transition-colors duration-150 ${isScrolled ? 'bg-black' : 'bg-gradient-to-b from-black to-transparent'}`}>
+      <header className={`fixed top-0 left-0 w-full flex pt-2 pb-1 z-10 transition-colors duration-150 ${isScrolled ? 'bg-black' : 'bg-gradient-to-b from-black to-transparent'}`}>
         <SidebarWithBurgerMenu />
         <div className="container ml-5 flex items-center justify-between">
           <Link to="/" className="header__logo flex items-center">
-            <img src={logo} alt="logo" id="logo" className="w-8 mr-2 hover:animate-spin" />
-            <h1 className="text-white text-3xl font-bold">Project-X</h1>
+            <img src={logo} alt="logo" id="logo" className="w-12 mr-2 hover:animate-spin" />
+            <h1 className="text-white text-3xl font-bold">Nova</h1>
           </Link>
           <div className="ml-16 translate-y-[4px] xl:block hidden mx-auto space-x-6">
             <Link to="/" className={`text-white hover:text-gray-500 font-medium font-sans pb-3 ${getLinkClass('/')}`}>Home</Link>

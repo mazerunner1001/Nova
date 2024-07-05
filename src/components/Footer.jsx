@@ -37,8 +37,8 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row md:justify-between mb-8">
           <div className=" space-y-4 mb-8 md:mb-0">
             <div className="flex items-center space-x-4 mb-8">
-              <img src={logo} alt="Logo" className="w-12 h-12" />
-              <Typography variant="h3" className="font-bold">Project-X</Typography>
+              <img src={logo} alt="Logo" className="w-16" />
+              <Typography variant="h3" className="font-bold">Nova</Typography>
             </div>
             <div className="inline">
               <Typography variant="h6" className="font-bold mb-2 md:mb-4">Newsletter</Typography>
@@ -84,7 +84,7 @@ export default function Footer() {
             variant="small"
             className="mb-4 text-center font-normal md:mb-0"
           >
-            &copy; {currentYear} <a href="https://material-tailwind.com/">Project-X</a>. All Rights Reserved.
+            &copy; {currentYear} <a href="https://material-tailwind.com/">Nova</a>. All Rights Reserved.
           </Typography>
           <div className="flex gap-4">
             <Typography as="a" href="https://www.facebook.com/praneethchandra123/" className="opacity-80 transition-opacity hover:opacity-100">

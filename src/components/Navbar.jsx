@@ -16,8 +16,8 @@ const Navbar = () => {
         <SidebarWithBurgerMenu className="md:block hidden" />
         <div className=" container ml-5 flex items-cente justify-between">
           <a href="navbar.html" className="header__logo flex items-center">
-            <img src={logo} alt="logo" id="logo" className="w-8 mr-2 hover:animate-spin" />
-            <h1 className="text-white text-3xl font-bold">Project-X</h1>
+            <img src={logo} alt="logo" id="logo" className="w-12 mr-2 hover:animate-spin" />
+            <h1 className="text-white text-3xl font-bold">Nova</h1>
           </a>
           <form className="rounded-3xl mt-3 translate-x-[-60px] h-10 bg-black bg-opacity-50 lg:block hidden" method="GET" action="">
             <label className=" py-1.5 px-4 flex space-x-12 xl:space-x-32 2xl:space-x-52">
