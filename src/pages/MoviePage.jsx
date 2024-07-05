@@ -267,7 +267,7 @@ const Movie = () => {
             <div className="flex space-x-4 w-full overflow-hidden relative">
               {directors.length > 0 && (
                 <div className="overflow-hidden relative w-auto">
-                  <h2 className="text-2xl text-white font-bold mb-4">Director(s)</h2>
+                  <h2 className="text-2xl text-white font-semibold mb-4">Director(s)</h2>
                   <div id="no-scrollbar" className="overflow-x-scroll overflow-y-none flex py-[30px]">
                     {directors.map(director => (
                       <div className="flex-shrink-0 w-36 m-1 cursor-pointer" key={director.id} onClick={() => handlePersonClick(director.id)}>
@@ -280,7 +280,7 @@ const Movie = () => {
               )}
               {directors.length > 0 && (<div className="bg-white w-[2px] h-64 translate-y-16 self-stretch mx-4"></div>)}
               <div className=" overflow-hidden relative flex-1">
-                <h2 className="text-2xl text-white font-bold mb-4">Cast</h2>
+                <h2 className="text-2xl text-white font-semibold mb-4">Cast</h2>
                 <div id="no-scrollbar" className="overflow-x-scroll overflow-y-none flex py-[30px]">
                   {cast.length > 0 && cast.map(actor => (
                     <div className="flex-shrink-0 w-36 m-1 cursor-pointer" key={actor.id} onClick={() => handlePersonClick(actor.id)}>
@@ -314,7 +314,7 @@ const Movie = () => {
       <hr className=" border-gray-700 w-4/5" />
 
       <div className="flex justify-between gap-8 w-4/5 divide-x divide-gray-700">
-      <div className="flex flex-col w-3/4 mt-16">
+      <div className="flex flex-col w-3/4 mt-10">
         <ReviewsSection reviews={reviews} />
       </div>
         <div className="w-1/4 flex flex-col gap-4 mt-10 pl-8">

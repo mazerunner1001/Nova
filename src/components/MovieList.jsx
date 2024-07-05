@@ -73,7 +73,7 @@ const MovieList = ({ type = "popular", Class = "movie", Subclass = "", style1 = 
         {movieList && movieList.length > 0 ? (
           movieList.map(movie => <Cards key={movie.id} movie={movie} />)
         ) : (
-          <span className="text-gray-400 text-lg">No Recommendations</span>
+          <span className="text-gray-400 text-lg ml-8">No Recommendations</span>
         )}
       </div>
       {showPagination && !style1 && (

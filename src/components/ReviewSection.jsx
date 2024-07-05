@@ -17,8 +17,8 @@ const ReviewsSection = ({ reviews }) => {
   };
 
   return (
-    <div className="w-full mt-10">
-      <h2 className="text-white text-2xl font-bold mb-4">Reviews</h2>
+    <div className="w-full">
+      <h2 className="text-white text-2xl font-semibold mb-8">Reviews</h2>
       <div className="space-y-4">
         {reviews.length > 0 ? (
           reviews.slice(0, loadedReviews).map((review, index) => (
